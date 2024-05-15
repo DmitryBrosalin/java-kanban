@@ -63,7 +63,13 @@ public class Main {
                     }
                     System.out.print("Введите идентификатор: ");
                     id = scanID(scanner, taskManager);
-                    taskManager.removeTask(id);
+                    if (taskManager.tasks.containsKey(id)) {
+                        taskManager.removeTask(id);
+                    } else if (taskManager.epics.containsKey(id)) {
+                        taskManager.removeEpic(id);
+                    } else if (taskManager.subtasks.containsKey(id)) {
+                        taskManager.removeSubtask(id);
+                    }
                     break;
                 case 5:
                     if (taskManager.tasks.isEmpty() &&
