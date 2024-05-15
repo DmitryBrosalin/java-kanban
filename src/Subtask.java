@@ -1,8 +1,21 @@
 public class Subtask extends Task {
-    int parentEpicID;
+    private int parentEpicID;
 
     public Subtask (String name, String description, State state, int parentEpicID) {
         super (name, description, state);
+        this.parentEpicID = parentEpicID;
+    }
+
+    public Subtask (String name, String description, int id, State state, int parentEpicID) {
+        super (name, description, id, state);
+        this.parentEpicID = parentEpicID;
+    }
+
+    public int getParentEpicID() {
+        return parentEpicID;
+    }
+
+    public void setParentEpicID(int parentEpicID) {
         this.parentEpicID = parentEpicID;
     }
 
