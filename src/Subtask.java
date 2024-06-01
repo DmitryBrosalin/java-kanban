@@ -28,4 +28,16 @@ public class Subtask extends Task {
                 ", id: " + id +
                 ", Статус: " + state + "\n";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Subtask subtask = (Subtask) o;
+        return name.equals(subtask.name) &&
+                description.equals(subtask.description) &&
+                id == subtask.id &&
+                state.equals(subtask.state) &&
+                parentEpicID == subtask.getParentEpicID();
+    }
 }

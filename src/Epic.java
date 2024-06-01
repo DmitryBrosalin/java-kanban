@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Objects;
 
 public class Epic extends Task {
     private ArrayList<Integer> subtasksID;
@@ -31,5 +31,18 @@ public class Epic extends Task {
                 ", Статус: " + state +
                 ", состоит из следующих подзадач (ID):\n" + subtasksID + "\n";//
 
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Epic epic = (Epic) o;
+        return name.equals(epic.name) &&
+                description.equals(epic.description) &&
+                id == epic.id &&
+                state.equals(epic.state) &&
+                Objects.equals(subtasksID, epic.subtasksID);
     }
 }

@@ -25,4 +25,15 @@ public class Task {
                 ", id: " + id +
                 ", Статус: " + state + "\n";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return name.equals(task.name) &&
+                description.equals(task.description) &&
+                id == task.id &&
+                state.equals(task.state);
+    }
 }

@@ -1,9 +1,9 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        TaskManager taskManager = new TaskManager();
+        InMemoryTaskManager inMemoryTaskManager = Managers.getDefault();
+        InMemoryHistoryManager inMemoryHistoryManager = Managers.getDefaultHistory();
         Scanner scanner = new Scanner(System.in);
         boolean isWorking = true;
 
@@ -16,65 +16,69 @@ public class Main {
                     int taskType = scanTaskType(scanner);
                     switch (taskType) {
                         case 1:
-                            taskManager.addNewTask(scanTask(scanner));
+                            inMemoryTaskManager.addNewTask(scanTask(scanner));
                             break;
                         case 2:
-                            taskManager.addNewEpic(scanEpic(scanner));
+                            inMemoryTaskManager.addNewEpic(scanEpic(scanner));
                             break;
                         case 3:
-                            taskManager.addNewSubtask(scanSubtask(scanner,taskManager));
+                            inMemoryTaskManager.addNewSubtask(scanSubtask(scanner, inMemoryTaskManager));
                             break;
                     }
                     break;
                 case 2:
-                    if (taskManager.tasks.isEmpty() &&
-                            taskManager.epics.isEmpty() &&
-                            taskManager.subtasks.isEmpty()) {
+                    if (inMemoryTaskManager.tasks.isEmpty() &&
+                            inMemoryTaskManager.epics.isEmpty() &&
+                            inMemoryTaskManager.subtasks.isEmpty()) {
                         System.out.println("Список всех задач пуст.");
                         break;
                     }
                     System.out.print("Введите идентификатор задачи, которую хотите обновить: ");
-                    int id = scanID(scanner, taskManager);
-                    updateTask(id, taskManager, scanner);
+                    int id = scanID(scanner, inMemoryTaskManager);
+                    updateTask(id, inMemoryTaskManager, scanner);
                     break;
                 case 3:
-                    if (taskManager.tasks.isEmpty() &&
-                            taskManager.epics.isEmpty() &&
-                            taskManager.subtasks.isEmpty()) {
+                    if (inMemoryTaskManager.tasks.isEmpty() &&
+                            inMemoryTaskManager.epics.isEmpty() &&
+                            inMemoryTaskManager.subtasks.isEmpty()) {
                         System.out.println("Список всех задач пуст.");
                         break;
                     }
                     System.out.print("Введите идентификатор: ");
-                    id = scanID(scanner, taskManager);
-                    if (taskManager.tasks.containsKey(id)) {
-                        System.out.println(taskManager.getTask(id));
-                    } else if (taskManager.epics.containsKey(id)) {
-                        System.out.println(taskManager.getEpic(id));
-                    } else if (taskManager.subtasks.containsKey(id)) {
-                        System.out.println(taskManager.getSubtask(id));
+                    id = scanID(scanner, inMemoryTaskManager);
+                    if (inMemoryTaskManager.tasks.containsKey(id)) {
+                        System.out.println(inMemoryTaskManager.getTask(id));
+                        inMemoryHistoryManager.addToHistory(inMemoryTaskManager.getTask(id));
+                    } else if (inMemoryTaskManager.epics.containsKey(id)) {
+                        System.out.println(inMemoryTaskManager.getEpic(id));
+                        inMemoryHistoryManager.addToHistory(inMemoryTaskManager.getEpic(id));
+                    } else if (inMemoryTaskManager.subtasks.containsKey(id)) {
+                        System.out.println(inMemoryTaskManager.getSubtask(id));
+                        inMemoryHistoryManager.addToHistory(inMemoryTaskManager.getSubtask(id));
                     }
+
                     break;
                 case 4:
-                    if (taskManager.tasks.isEmpty() &&
-                            taskManager.epics.isEmpty() &&
-                            taskManager.subtasks.isEmpty()) {
+                    if (inMemoryTaskManager.tasks.isEmpty() &&
+                            inMemoryTaskManager.epics.isEmpty() &&
+                            inMemoryTaskManager.subtasks.isEmpty()) {
                         System.out.println("Список всех задач пуст.");
                         break;
                     }
                     System.out.print("Введите идентификатор: ");
-                    id = scanID(scanner, taskManager);
-                    if (taskManager.tasks.containsKey(id)) {
-                        taskManager.removeTask(id);
-                    } else if (taskManager.epics.containsKey(id)) {
-                        taskManager.removeEpic(id);
-                    } else if (taskManager.subtasks.containsKey(id)) {
-                        taskManager.removeSubtask(id);
+                    id = scanID(scanner, inMemoryTaskManager);
+                    if (inMemoryTaskManager.tasks.containsKey(id)) {
+                        inMemoryTaskManager.removeTask(id);
+                    } else if (inMemoryTaskManager.epics.containsKey(id)) {
+                        inMemoryTaskManager.removeEpic(id);
+                    } else if (inMemoryTaskManager.subtasks.containsKey(id)) {
+                        inMemoryTaskManager.removeSubtask(id);
                     }
                     break;
                 case 5:
-                    if (taskManager.tasks.isEmpty() &&
-                            taskManager.epics.isEmpty() &&
-                            taskManager.subtasks.isEmpty()) {
+                    if (inMemoryTaskManager.tasks.isEmpty() &&
+                            inMemoryTaskManager.epics.isEmpty() &&
+                            inMemoryTaskManager.subtasks.isEmpty()) {
                         System.out.println("Список всех задач пуст.");
                         break;
                     }
@@ -82,46 +86,54 @@ public class Main {
                     taskType = scanTaskType(scanner);
                     switch (taskType) {
                         case 1:
-                            if (taskManager.tasks.isEmpty()) {
+                            if (inMemoryTaskManager.tasks.isEmpty()) {
                                 System.out.println("Список задач пуст.");
                                 break;
                             }
-                            System.out.println(taskManager.getTasks());
+                            System.out.println(inMemoryTaskManager.getTasks());
                             break;
                         case 2:
-                            if (taskManager.epics.isEmpty()) {
+                            if (inMemoryTaskManager.epics.isEmpty()) {
                                 System.out.println("Список эпиков пуст.");
                                 break;
                             }
-                            System.out.println(taskManager.getEpics());
+                            System.out.println(inMemoryTaskManager.getEpics());
                             break;
                         case 3:
-                            if (taskManager.subtasks.isEmpty()) {
+                            if (inMemoryTaskManager.subtasks.isEmpty()) {
                                 System.out.println("Список подзадач пуст.");
                                 break;
                             }
-                            System.out.println(taskManager.getSubtasks());
+                            System.out.println(inMemoryTaskManager.getSubtasks());
                             break;
                     }
 
                     break;
                 case 6:
-                    if (taskManager.tasks.isEmpty() &&
-                            taskManager.epics.isEmpty() &&
-                            taskManager.subtasks.isEmpty()) {
+                    if (inMemoryTaskManager.tasks.isEmpty() &&
+                            inMemoryTaskManager.epics.isEmpty() &&
+                            inMemoryTaskManager.subtasks.isEmpty()) {
                         System.out.println("Список всех задач пуст.");
                         break;
                     }
-                    taskManager.removeAllTasks();
+                    inMemoryTaskManager.removeAllTasks();
                     break;
                 case 7:
-                    if (taskManager.epics.isEmpty()) {
+                    if (inMemoryTaskManager.epics.isEmpty()) {
                         System.out.println("Список эпиков пуст.");
                         break;
                     } else {
                         System.out.print("Введите идентификатор: ");
-                        id = scanID(scanner, taskManager);
-                        System.out.println(taskManager.getSubtasksForEpic(id));
+                        id = scanID(scanner, inMemoryTaskManager);
+                        System.out.println(inMemoryTaskManager.getSubtasksForEpic(id));
+                    }
+                    break;
+                case 8:
+                    if (inMemoryHistoryManager.history.isEmpty()) {
+                        System.out.println("История просмотров пуста.");
+                        break;
+                    } else {
+                        System.out.println(inMemoryHistoryManager.getHistory());
                     }
                     break;
                 case 0:
@@ -149,18 +161,18 @@ public class Main {
         return new Epic (name, description);
     }
 
-    public static Subtask scanSubtask(Scanner scanner, TaskManager taskManager) {
+    public static Subtask scanSubtask(Scanner scanner, InMemoryTaskManager inMemoryTaskManager) {
         System.out.println("Введите id эпика, к которому относится подзадача.");
         int parentEpicId;
         while (true) {
-        parentEpicId = scanID(scanner, taskManager);
-        if (!taskManager.epics.containsKey(parentEpicId)) {
+        parentEpicId = scanID(scanner, inMemoryTaskManager);
+        if (!inMemoryTaskManager.epics.containsKey(parentEpicId)) {
                 System.out.println("Эпика с id=" + parentEpicId + " нет. Попробуйте еще раз.");
             } else {
                 break;
             }
         }
-        System.out.println("Выбран "+taskManager.epics.get(parentEpicId));
+        System.out.println("Выбран "+ inMemoryTaskManager.epics.get(parentEpicId));
         System.out.println("Введите название подзадачи.");
         String name = scanString(scanner);
         System.out.println("Введите описание подзадачи.");
@@ -169,30 +181,26 @@ public class Main {
         return new Subtask(name, description, state, parentEpicId);
     }
 
-    public static void updateTask(int id, TaskManager taskManager, Scanner scanner) {
-        if (taskManager.tasks.containsKey(id)) {
+    public static void updateTask(int id, InMemoryTaskManager inMemoryTaskManager, Scanner scanner) {
+        if (inMemoryTaskManager.tasks.containsKey(id)) {
             Task task = scanTask(scanner);
             task.id = id;
-            taskManager.updateTask(task);
-        } else if (taskManager.epics.containsKey(id)) {
+            inMemoryTaskManager.updateTask(task);
+        } else if (inMemoryTaskManager.epics.containsKey(id)) {
             Epic epic = scanEpic(scanner);
             epic.id = id;
-            taskManager.updateEpic(epic);
-        } else if (taskManager.subtasks.containsKey(id)) {
-            Subtask subtask = taskManager.subtasks.get(id);
-            Epic parentEpic = taskManager.epics.get(subtask.getParentEpicID());
-            Subtask updatedSubtask = scanSubtask(scanner, taskManager);
+            inMemoryTaskManager.updateEpic(epic);
+        } else if (inMemoryTaskManager.subtasks.containsKey(id)) {
+            Subtask updatedSubtask = scanSubtask(scanner, inMemoryTaskManager);
             updatedSubtask.id = id;
-            parentEpic.getSubtasksID().remove((Object) id);
-            taskManager.updateSubtask(updatedSubtask);
-            taskManager.checkEpicState(parentEpic);
+            inMemoryTaskManager.updateSubtask(updatedSubtask);
         }
     }
 
     public static int scanCommand(Scanner scanner) {
         while (true) {
         int cmd = scanNumber(scanner);
-            if (cmd<0 || cmd>7) {
+            if (cmd<0 || cmd>8) {
                 System.out.println("Команды " + cmd + " нет. Попробуйте еще раз.");
             } else {
                 return cmd;
@@ -211,12 +219,12 @@ public class Main {
         }
     }
 
-    public static int scanID(Scanner scanner, TaskManager taskManager) {
+    public static int scanID(Scanner scanner, InMemoryTaskManager inMemoryTaskManager) {
         while (true) {
             int id = scanNumber(scanner);
-            if (!taskManager.tasks.containsKey(id) &&
-                    !taskManager.epics.containsKey(id) &&
-                    !taskManager.subtasks.containsKey(id)) {
+            if (!inMemoryTaskManager.tasks.containsKey(id) &&
+                    !inMemoryTaskManager.epics.containsKey(id) &&
+                    !inMemoryTaskManager.subtasks.containsKey(id)) {
                 System.out.println("ID задачи " + id + " нет. Попробуйте еще раз.");
             } else {
                 return id;
@@ -271,6 +279,7 @@ public class Main {
         System.out.println("5. Получить список всех задач (по типу).");
         System.out.println("6. Удалить все задачи.");
         System.out.println("7. Получить список подзадач эпика по идентификатору.");
+        System.out.println("8. Получить историю просмотренных задач.");
         System.out.println("0. Выход.");
     }
 
