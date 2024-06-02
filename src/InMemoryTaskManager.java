@@ -1,11 +1,12 @@
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.List;
 
 public class InMemoryTaskManager implements TaskManager {
-    HashMap<Integer, Task> tasks;
-    HashMap<Integer, Epic> epics;
-    HashMap<Integer, Subtask> subtasks;
-    int counter;
+    private HashMap<Integer, Task> tasks;
+    private HashMap<Integer, Epic> epics;
+    private HashMap<Integer, Subtask> subtasks;
+    private int counter;
 
     public InMemoryTaskManager() {
         tasks = new HashMap<>();
@@ -55,7 +56,7 @@ public class InMemoryTaskManager implements TaskManager {
     public ArrayList<Subtask> getSubtasksForEpic(int id) {
         ArrayList<Subtask> subtasksForEpic = new ArrayList<>();
         Epic parentEpic = epics.get(id);
-        ArrayList<Integer> subtasksID = parentEpic.getSubtasksID();
+        List<Integer> subtasksID = parentEpic.getSubtasksID();
         for (int subtaskID: subtasksID) {
             subtasksForEpic.add(subtasks.get(subtaskID));
         }
@@ -78,7 +79,7 @@ public class InMemoryTaskManager implements TaskManager {
     public void removeSubtask(int id) {
         Subtask subtask = subtasks.get(id);
         Epic parentEpic = epics.get(subtask.getParentEpicID());
-        ArrayList<Integer> subtasksID= parentEpic.getSubtasksID();
+        List<Integer> subtasksID= parentEpic.getSubtasksID();
 
         for (Integer subID: subtasksID) {
             if (subID == id) {
@@ -106,7 +107,7 @@ public class InMemoryTaskManager implements TaskManager {
     public void addNewSubtask(Subtask subtask) {
         subtask.id = generateID();
         Epic parentEpic = epics.get(subtask.getParentEpicID());
-        ArrayList<Integer> subtasksID= parentEpic.getSubtasksID();
+        List<Integer> subtasksID= parentEpic.getSubtasksID();
         subtasksID.add(subtask.id);
         subtasks.put(subtask.id, subtask);
 
@@ -153,5 +154,10 @@ public class InMemoryTaskManager implements TaskManager {
                 epicSubtasksStates.contains(State.IN_PROGRESS))) {
             epic.state = State.DONE;
         } else epic.state = State.IN_PROGRESS;
+    }
+
+    @Override
+    public List<Task> getHistory(HistoryManager historyManager) {
+        return historyManager.getHistory();
     }
 }

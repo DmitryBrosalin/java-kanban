@@ -18,15 +18,15 @@ class InMemoryTaskManagerTest {
                 State.NEW, epic.id);
         inMemoryTaskManager.addNewSubtask(subtask);
 
-        assertNotNull(inMemoryTaskManager.tasks, "Задача не была добавлена.");
-        assertNotNull(inMemoryTaskManager.epics, "Эпик не был добавлен.");
-        assertNotNull(inMemoryTaskManager.subtasks, "Подзадача не была добавлена.");
+        assertNotNull(inMemoryTaskManager.getTasks(), "Задача не была добавлена.");
+        assertNotNull(inMemoryTaskManager.getEpics(), "Эпик не был добавлен.");
+        assertNotNull(inMemoryTaskManager.getSubtasks(), "Подзадача не была добавлена.");
 
         inMemoryTaskManager.removeAllTasks();
 
-        assertTrue(inMemoryTaskManager.tasks.isEmpty(), "Задача не была удалена.");
-        assertTrue(inMemoryTaskManager.epics.isEmpty(), "Эпик не был удален.");
-        assertTrue(inMemoryTaskManager.subtasks.isEmpty(), "Подзадача не была удалена.");
+        assertTrue(inMemoryTaskManager.getTasks().isEmpty(), "Задача не была удалена.");
+        assertTrue(inMemoryTaskManager.getEpics().isEmpty(), "Эпик не был удален.");
+        assertTrue(inMemoryTaskManager.getSubtasks().isEmpty(), "Подзадача не была удалена.");
     }
 
     @Test
@@ -56,9 +56,9 @@ class InMemoryTaskManagerTest {
         InMemoryTaskManager inMemoryTaskManager = new InMemoryTaskManager();
         Task task = new Task("Test addNewTask", "Test addNewTask description", State.NEW);
         inMemoryTaskManager.addNewTask(task);
-        assertNotNull(inMemoryTaskManager.tasks, "Задача не была добавлена.");
+        assertNotNull(inMemoryTaskManager.getTasks(), "Задача не была добавлена.");
         inMemoryTaskManager.removeTask(task.id);
-        assertTrue(inMemoryTaskManager.tasks.isEmpty(), "Задача не была удалена.");
+        assertTrue(inMemoryTaskManager.getTasks().isEmpty(), "Задача не была удалена.");
     }
 
     @Test
@@ -66,9 +66,9 @@ class InMemoryTaskManagerTest {
         InMemoryTaskManager inMemoryTaskManager = new InMemoryTaskManager();
         Epic epic = new Epic("Test addNewEpic", "Test addNewEpic description");
         inMemoryTaskManager.addNewEpic(epic);
-        assertNotNull(inMemoryTaskManager.epics, "Эпик не был добавлен.");
+        assertNotNull(inMemoryTaskManager.getEpics(), "Эпик не был добавлен.");
         inMemoryTaskManager.removeEpic(epic.id);
-        assertTrue(inMemoryTaskManager.epics.isEmpty(), "Эпик не был удален.");
+        assertTrue(inMemoryTaskManager.getEpics().isEmpty(), "Эпик не был удален.");
     }
 
     @Test
@@ -79,11 +79,11 @@ class InMemoryTaskManagerTest {
         Subtask subtask = new Subtask("Test addNewSubtask", "Test addNewSubtask description",
                 State.NEW, epic.id);
         inMemoryTaskManager.addNewSubtask(subtask);
-        assertNotNull(inMemoryTaskManager.epics, "Эпик не был добавлен.");
-        assertNotNull(inMemoryTaskManager.subtasks, "Подзадача не была добавлена.");
+        assertNotNull(inMemoryTaskManager.getEpics(), "Эпик не был добавлен.");
+        assertNotNull(inMemoryTaskManager.getSubtasks(), "Подзадача не была добавлена.");
         inMemoryTaskManager.removeEpic(epic.id);
-        assertTrue(inMemoryTaskManager.epics.isEmpty(), "Эпик не был удален.");
-        assertTrue(inMemoryTaskManager.subtasks.isEmpty(), "Подзадача не была удалена.");
+        assertTrue(inMemoryTaskManager.getEpics().isEmpty(), "Эпик не был удален.");
+        assertTrue(inMemoryTaskManager.getSubtasks().isEmpty(), "Подзадача не была удалена.");
     }
 
     @Test
@@ -94,10 +94,10 @@ class InMemoryTaskManagerTest {
         Subtask subtask = new Subtask("Test addNewSubtask", "Test addNewSubtask description",
                 State.NEW, epic.id);
         inMemoryTaskManager.addNewSubtask(subtask);
-        assertNotNull(inMemoryTaskManager.epics, "Эпик не был добавлен.");
-        assertNotNull(inMemoryTaskManager.subtasks, "Подзадача не была добавлена.");
+        assertNotNull(inMemoryTaskManager.getEpics(), "Эпик не был добавлен.");
+        assertNotNull(inMemoryTaskManager.getSubtasks(), "Подзадача не была добавлена.");
         inMemoryTaskManager.removeSubtask(subtask.id);
-        assertTrue(inMemoryTaskManager.subtasks.isEmpty(), "Подзадача не была удалена.");
+        assertTrue(inMemoryTaskManager.getSubtasks().isEmpty(), "Подзадача не была удалена.");
     }
 
     @Test

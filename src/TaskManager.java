@@ -1,12 +1,12 @@
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public interface TaskManager {
-    HashMap<Integer, Task> getTasks();
+    Map<Integer, Task> getTasks();
 
-    HashMap<Integer, Epic> getEpics();
+    Map<Integer, Epic> getEpics();
 
-    HashMap<Integer, Subtask> getSubtasks();
+    Map<Integer, Subtask> getSubtasks();
 
     void removeAllTasks();
 
@@ -16,7 +16,7 @@ public interface TaskManager {
 
     Subtask getSubtask(int id);
 
-    ArrayList<Subtask> getSubtasksForEpic(int id);
+    List<Subtask> getSubtasksForEpic(int id);
 
     void removeTask(int id);
 
@@ -39,4 +39,7 @@ public interface TaskManager {
     int generateID();
 
     void checkEpicState(Epic epic);
+
+    List<Task> getHistory(HistoryManager historyManager);
 }
+
