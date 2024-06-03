@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,7 +12,7 @@ class InMemoryHistoryManagerTest {
         InMemoryHistoryManager inMemoryHistoryManager = new InMemoryHistoryManager();
         Task task = new Task("Test Task", "Test Task description", State.NEW);
         inMemoryHistoryManager.addToHistory(task);
-        assertFalse(inMemoryHistoryManager.history.isEmpty(), "Задача не была добавлена в историю просмотра.");
+        assertFalse(inMemoryHistoryManager.getHistory().isEmpty(), "Задача не была добавлена в историю просмотра.");
     }
 
     @Test
@@ -21,7 +22,7 @@ class InMemoryHistoryManagerTest {
         inMemoryHistoryManager.addToHistory(task);
         ArrayList<Task> history = new ArrayList<>();
         history.add(task);
-        ArrayList<Task> savedHistory = inMemoryHistoryManager.getHistory();
+        List<Task> savedHistory = inMemoryHistoryManager.getHistory();
         assertNotNull(savedHistory, "Не удалось создать историю просмотра.");
         assertEquals(savedHistory, history, "Не удалось вернуть историю просмотра корректно.");
     }
@@ -53,7 +54,7 @@ class InMemoryHistoryManagerTest {
         inMemoryHistoryManager.addToHistory(task10);
         inMemoryHistoryManager.addToHistory(task11);
 
-        ArrayList<Task> savedHistory = inMemoryHistoryManager.getHistory();
+        List<Task> savedHistory = inMemoryHistoryManager.getHistory();
 
         ArrayList<Task> history = new ArrayList<>();
         history.add(task2);

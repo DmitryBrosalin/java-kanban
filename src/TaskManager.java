@@ -40,6 +40,8 @@ public interface TaskManager {
 
     void checkEpicState(Epic epic);
 
-    List<Task> getHistory(HistoryManager historyManager);
+    List<Task> getHistory();
+
+    void addToHistory(Task task);
 }
 

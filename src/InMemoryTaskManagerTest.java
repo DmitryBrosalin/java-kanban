@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -112,7 +112,7 @@ class InMemoryTaskManagerTest {
         assertNotNull(savedTask, "Задача не найдена.");
         assertEquals(task, savedTask, "Задачи не совпадают.");
 
-        final HashMap<Integer, Task> tasks = inMemoryTaskManager.getTasks();
+        final Map<Integer, Task> tasks = inMemoryTaskManager.getTasks();
 
         assertNotNull(tasks, "Задачи не возвращаются.");
         assertEquals(1, tasks.size(), "Неверное количество задач.");
@@ -131,7 +131,7 @@ class InMemoryTaskManagerTest {
         assertNotNull(savedEpic, "Задача не найдена.");
         assertEquals(epic, savedEpic, "Задачи не совпадают.");
 
-        final HashMap<Integer, Epic> epics = inMemoryTaskManager.getEpics();
+        final Map<Integer, Epic> epics = inMemoryTaskManager.getEpics();
 
         assertNotNull(epics, "Задачи не возвращаются.");
         assertEquals(1, epics.size(), "Неверное количество задач.");
@@ -153,7 +153,7 @@ class InMemoryTaskManagerTest {
         assertNotNull(savedSubtask, "Задача не найдена.");
         assertEquals(subtask, savedSubtask, "Задачи не совпадают.");
 
-        final HashMap<Integer, Subtask> subtasks = inMemoryTaskManager.getSubtasks();
+        final Map<Integer, Subtask> subtasks = inMemoryTaskManager.getSubtasks();
 
         assertNotNull(subtasks, "Задачи не возвращаются.");
         assertEquals(1, subtasks.size(), "Неверное количество задач.");
@@ -173,7 +173,7 @@ class InMemoryTaskManagerTest {
 
         assertNotNull(savedUpdatedTask, "Задача не найдена.");
 
-        final HashMap<Integer, Task> tasks = inMemoryTaskManager.getTasks();
+        final Map<Integer, Task> tasks = inMemoryTaskManager.getTasks();
 
         assertNotNull(tasks, "Задачи не возвращаются.");
         assertEquals(1, tasks.size(), "Неверное количество задач.");
@@ -193,7 +193,7 @@ class InMemoryTaskManagerTest {
 
         assertNotNull(savedUpdatedEpic, "Задача не найдена.");
 
-        final HashMap<Integer, Epic> epics = inMemoryTaskManager.getEpics();
+        final Map<Integer, Epic> epics = inMemoryTaskManager.getEpics();
 
         assertNotNull(epics, "Задачи не возвращаются.");
         assertEquals(1, epics.size(), "Неверное количество задач.");
@@ -216,7 +216,7 @@ class InMemoryTaskManagerTest {
         assertNotNull(savedSubtask, "Задача не найдена.");
         assertEquals(updatedSubtask, savedSubtask, "Обновленные задачи не совпадают.");
 
-        final HashMap<Integer, Subtask> subtasks = inMemoryTaskManager.getSubtasks();
+        final Map<Integer, Subtask> subtasks = inMemoryTaskManager.getSubtasks();
 
         assertNotNull(subtasks, "Задачи не возвращаются.");
         assertEquals(1, subtasks.size(), "Неверное количество задач.");
@@ -243,7 +243,7 @@ class InMemoryTaskManagerTest {
         assertNotNull(savedSubtask1, "Задача не найдена.");
         assertEquals(updatedSubtask1, savedSubtask1, "Обновленные задачи не совпадают.");
 
-        final HashMap<Integer, Subtask> subtasks = inMemoryTaskManager.getSubtasks();
+        final Map<Integer, Subtask> subtasks = inMemoryTaskManager.getSubtasks();
 
         assertNotNull(subtasks, "Задачи не возвращаются.");
         assertEquals(2, subtasks.size(), "Неверное количество задач.");
