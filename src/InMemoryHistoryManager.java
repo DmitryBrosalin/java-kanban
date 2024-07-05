@@ -27,9 +27,9 @@ public class InMemoryHistoryManager implements HistoryManager {
         history.remove(id);
     }
 
-    static class LinkedHashMapOfTasks<Integer, Task> extends LinkedHashMap<Integer, Task> {
+    static class LinkedHashMapOfTasks<K, V> extends LinkedHashMap<K, V> {
         @Override
-        public Task put(Integer id, Task task) {
+        public V put(K id, V task) {
             if (this.containsValue(task)) {
                 this.remove(id, task);
                 }
