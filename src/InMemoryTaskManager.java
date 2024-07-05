@@ -65,6 +65,7 @@ public class InMemoryTaskManager implements TaskManager {
         }
         return subtasksForEpic;
     }
+
     @Override
     public void removeTask(int id) {
             tasks.remove(id);
@@ -85,7 +86,7 @@ public class InMemoryTaskManager implements TaskManager {
     public void removeSubtask(int id) {
         Subtask subtask = subtasks.get(id);
         Epic parentEpic = epics.get(subtask.getParentEpicID());
-        List<Integer> subtasksID= parentEpic.getSubtasksID();
+        List<Integer> subtasksID = parentEpic.getSubtasksID();
 
         for (Integer subID: subtasksID) {
             if (subID == id) {
@@ -114,7 +115,7 @@ public class InMemoryTaskManager implements TaskManager {
     public void addNewSubtask(Subtask subtask) {
         subtask.id = generateID();
         Epic parentEpic = epics.get(subtask.getParentEpicID());
-        List<Integer> subtasksID= parentEpic.getSubtasksID();
+        List<Integer> subtasksID = parentEpic.getSubtasksID();
         subtasksID.add(subtask.id);
         subtasks.put(subtask.id, subtask);
 
@@ -144,7 +145,7 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public int generateID(){
+    public int generateID() {
         return counter++;
     }
 
