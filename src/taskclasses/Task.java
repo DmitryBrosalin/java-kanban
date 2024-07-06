@@ -1,4 +1,4 @@
-package taskClasses;
+package taskclasses;
 
 public class Task {
     protected String name;

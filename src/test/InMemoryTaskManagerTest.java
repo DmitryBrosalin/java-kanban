@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Map;
 
-import taskClasses.*;
+import taskclasses.*;
 import managers.*;
 
 import static org.junit.jupiter.api.Assertions.*;

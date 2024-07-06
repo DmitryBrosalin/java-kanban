@@ -1,4 +1,4 @@
-package taskClasses;
+package taskclasses;
 
 public class Subtask extends Task {
     private int parentEpicID;

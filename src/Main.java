@@ -1,5 +1,5 @@
 import managers.*;
-import taskClasses.*;
+import taskclasses.*;
 
 import java.util.Scanner;
 
