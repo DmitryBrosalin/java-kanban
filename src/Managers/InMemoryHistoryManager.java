@@ -1,3 +1,7 @@
+package Managers;
+
+import TaskClasses.Task;
+
 import java.util.*;
 
 public class InMemoryHistoryManager implements HistoryManager {
@@ -10,7 +14,7 @@ public class InMemoryHistoryManager implements HistoryManager {
 
     @Override
     public void addToHistory(Task task) {
-        history.put(task.id, task);
+        history.put(task.getId(), task);
     }
 
     @Override

@@ -1,3 +1,6 @@
+import Managers.*;
+import TaskClasses.*;
+
 import java.util.Scanner;
 
 public class Main {
@@ -183,15 +186,15 @@ public class Main {
     public static void updateTask(int id, TaskManager inMemoryTaskManager, Scanner scanner) {
         if (inMemoryTaskManager.getTasks().containsKey(id)) {
             Task task = scanTask(scanner);
-            task.id = id;
+            task.setId(id);
             inMemoryTaskManager.updateTask(task);
         } else if (inMemoryTaskManager.getEpics().containsKey(id)) {
             Epic epic = scanEpic(scanner);
-            epic.id = id;
+            epic.setId(id);
             inMemoryTaskManager.updateEpic(epic);
         } else if (inMemoryTaskManager.getSubtasks().containsKey(id)) {
             Subtask updatedSubtask = scanSubtask(scanner, inMemoryTaskManager);
-            updatedSubtask.id = id;
+            updatedSubtask.setId(id);
             inMemoryTaskManager.updateSubtask(updatedSubtask);
         }
     }
