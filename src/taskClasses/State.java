@@ -1,4 +1,4 @@
-package TaskClasses;
+package taskClasses;
 
 public enum State {
     NEW,

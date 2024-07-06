@@ -1,9 +1,9 @@
-package Managers;
+package managers;
 
-import TaskClasses.Epic;
-import TaskClasses.State;
-import TaskClasses.Subtask;
-import TaskClasses.Task;
+import taskClasses.Epic;
+import taskClasses.State;
+import taskClasses.Subtask;
+import taskClasses.Task;
 
 import java.util.HashMap;
 import java.util.ArrayList;

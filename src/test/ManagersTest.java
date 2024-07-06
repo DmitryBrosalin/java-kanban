@@ -1,9 +1,8 @@
 package test;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import Managers.*;
+import managers.*;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
