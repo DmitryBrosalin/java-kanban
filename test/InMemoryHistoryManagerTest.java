@@ -65,6 +65,6 @@ class InMemoryHistoryManagerTest {
         history.add(task1);
         List<Task> savedHistory = inMemoryHistoryManager.getHistory();
         assertNotNull(savedHistory, "Не удалось создать историю просмотра.");
-        assertEquals(savedHistory, history, "Не удалось вернуть историю просмотра корректно.");
+        assertEquals(savedHistory, history, "Не удалось вернуть историю просмотра корректно при повторном запросе задачи.");
     }
 }
