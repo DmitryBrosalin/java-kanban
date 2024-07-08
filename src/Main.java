@@ -1,3 +1,6 @@
+import managers.*;
+import taskclasses.*;
+
 import java.util.Scanner;
 
 public class Main {
@@ -143,7 +146,7 @@ public class Main {
         }
     }
 
-    public static Task scanTask (Scanner scanner) {
+    public static Task scanTask(Scanner scanner) {
         System.out.println("Введите название задачи.");
         String name = scanString(scanner);
         System.out.println("Введите описание задачи.");
@@ -152,12 +155,12 @@ public class Main {
         return new Task(name, description, state);
     }
 
-    public static  Epic scanEpic (Scanner scanner) {
+    public static  Epic scanEpic(Scanner scanner) {
         System.out.println("Введите название эпика.");
         String name = scanString(scanner);
         System.out.println("Введите описание эпика.");
         String description = scanString(scanner);
-        return new Epic (name, description);
+        return new Epic(name, description);
     }
 
     public static Subtask scanSubtask(Scanner scanner, TaskManager inMemoryTaskManager) {
@@ -171,7 +174,7 @@ public class Main {
                 break;
             }
         }
-        System.out.println("Выбран "+ inMemoryTaskManager.getEpics().get(parentEpicId));
+        System.out.println("Выбран " + inMemoryTaskManager.getEpics().get(parentEpicId));
         System.out.println("Введите название подзадачи.");
         String name = scanString(scanner);
         System.out.println("Введите описание подзадачи.");
@@ -183,15 +186,15 @@ public class Main {
     public static void updateTask(int id, TaskManager inMemoryTaskManager, Scanner scanner) {
         if (inMemoryTaskManager.getTasks().containsKey(id)) {
             Task task = scanTask(scanner);
-            task.id = id;
+            task.setId(id);
             inMemoryTaskManager.updateTask(task);
         } else if (inMemoryTaskManager.getEpics().containsKey(id)) {
             Epic epic = scanEpic(scanner);
-            epic.id = id;
+            epic.setId(id);
             inMemoryTaskManager.updateEpic(epic);
         } else if (inMemoryTaskManager.getSubtasks().containsKey(id)) {
             Subtask updatedSubtask = scanSubtask(scanner, inMemoryTaskManager);
-            updatedSubtask.id = id;
+            updatedSubtask.setId(id);
             inMemoryTaskManager.updateSubtask(updatedSubtask);
         }
     }
@@ -199,7 +202,7 @@ public class Main {
     public static int scanCommand(Scanner scanner) {
         while (true) {
         int cmd = scanNumber(scanner);
-            if (cmd<0 || cmd>8) {
+            if (cmd < 0 || cmd > 8) {
                 System.out.println("Команды " + cmd + " нет. Попробуйте еще раз.");
             } else {
                 return cmd;
@@ -210,7 +213,7 @@ public class Main {
     public static int scanTaskType(Scanner scanner) {
         while (true) {
             int taskType = scanNumber(scanner);
-            if (taskType<1 || taskType>3) {
+            if (taskType < 1 || taskType > 3) {
                 System.out.println("Типа задачи " + taskType + " нет. Попробуйте еще раз.");
             } else {
                 return taskType;

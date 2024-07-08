@@ -1,7 +1,11 @@
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Map;
+
+import taskclasses.*;
+import managers.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,18 +19,18 @@ class InMemoryTaskManagerTest {
         Epic epic = new Epic("Test addNewEpic", "Test addNewEpic description");
         inMemoryTaskManager.addNewEpic(epic);
         Subtask subtask = new Subtask("Test addNewSubtask", "Test addNewSubtask description",
-                State.NEW, epic.id);
+                State.NEW, epic.getId());
         inMemoryTaskManager.addNewSubtask(subtask);
 
-        assertNotNull(inMemoryTaskManager.getTasks(), "Задача не была добавлена.");
-        assertNotNull(inMemoryTaskManager.getEpics(), "Эпик не был добавлен.");
-        assertNotNull(inMemoryTaskManager.getSubtasks(), "Подзадача не была добавлена.");
+        Assertions.assertNotNull(inMemoryTaskManager.getTasks(), "Задача не была добавлена.");
+        Assertions.assertNotNull(inMemoryTaskManager.getEpics(), "Эпик не был добавлен.");
+        Assertions.assertNotNull(inMemoryTaskManager.getSubtasks(), "Подзадача не была добавлена.");
 
         inMemoryTaskManager.removeAllTasks();
 
-        assertTrue(inMemoryTaskManager.getTasks().isEmpty(), "Задача не была удалена.");
-        assertTrue(inMemoryTaskManager.getEpics().isEmpty(), "Эпик не был удален.");
-        assertTrue(inMemoryTaskManager.getSubtasks().isEmpty(), "Подзадача не была удалена.");
+        Assertions.assertTrue(inMemoryTaskManager.getTasks().isEmpty(), "Задача не была удалена.");
+        Assertions.assertTrue(inMemoryTaskManager.getEpics().isEmpty(), "Эпик не был удален.");
+        Assertions.assertTrue(inMemoryTaskManager.getSubtasks().isEmpty(), "Подзадача не была удалена.");
     }
 
     @Test
@@ -47,7 +51,7 @@ class InMemoryTaskManagerTest {
         inMemoryTaskManager.addNewSubtask(subtask1);
         inMemoryTaskManager.addNewSubtask(subtask2);
         inMemoryTaskManager.addNewSubtask(subtask3);
-        ArrayList<Subtask> savedSubtasksForEpic = inMemoryTaskManager.getSubtasksForEpic(parentEpic.id);
+        ArrayList<Subtask> savedSubtasksForEpic = inMemoryTaskManager.getSubtasksForEpic(parentEpic.getId());
         assertEquals(savedSubtasksForEpic, subtasksForEpic, "Сохраненные подзадачи не совпадают с введенными.");
     }
 
@@ -56,9 +60,9 @@ class InMemoryTaskManagerTest {
         InMemoryTaskManager inMemoryTaskManager = new InMemoryTaskManager();
         Task task = new Task("Test addNewTask", "Test addNewTask description", State.NEW);
         inMemoryTaskManager.addNewTask(task);
-        assertNotNull(inMemoryTaskManager.getTasks(), "Задача не была добавлена.");
-        inMemoryTaskManager.removeTask(task.id);
-        assertTrue(inMemoryTaskManager.getTasks().isEmpty(), "Задача не была удалена.");
+        Assertions.assertNotNull(inMemoryTaskManager.getTasks(), "Задача не была добавлена.");
+        inMemoryTaskManager.removeTask(task.getId());
+        Assertions.assertTrue(inMemoryTaskManager.getTasks().isEmpty(), "Задача не была удалена.");
     }
 
     @Test
@@ -66,9 +70,9 @@ class InMemoryTaskManagerTest {
         InMemoryTaskManager inMemoryTaskManager = new InMemoryTaskManager();
         Epic epic = new Epic("Test addNewEpic", "Test addNewEpic description");
         inMemoryTaskManager.addNewEpic(epic);
-        assertNotNull(inMemoryTaskManager.getEpics(), "Эпик не был добавлен.");
-        inMemoryTaskManager.removeEpic(epic.id);
-        assertTrue(inMemoryTaskManager.getEpics().isEmpty(), "Эпик не был удален.");
+        Assertions.assertNotNull(inMemoryTaskManager.getEpics(), "Эпик не был добавлен.");
+        inMemoryTaskManager.removeEpic(epic.getId());
+        Assertions.assertTrue(inMemoryTaskManager.getEpics().isEmpty(), "Эпик не был удален.");
     }
 
     @Test
@@ -77,13 +81,13 @@ class InMemoryTaskManagerTest {
         Epic epic = new Epic("Test addNewEpic", "Test addNewEpic description");
         inMemoryTaskManager.addNewEpic(epic);
         Subtask subtask = new Subtask("Test addNewSubtask", "Test addNewSubtask description",
-                State.NEW, epic.id);
+                State.NEW, epic.getId());
         inMemoryTaskManager.addNewSubtask(subtask);
-        assertNotNull(inMemoryTaskManager.getEpics(), "Эпик не был добавлен.");
-        assertNotNull(inMemoryTaskManager.getSubtasks(), "Подзадача не была добавлена.");
-        inMemoryTaskManager.removeEpic(epic.id);
-        assertTrue(inMemoryTaskManager.getEpics().isEmpty(), "Эпик не был удален.");
-        assertTrue(inMemoryTaskManager.getSubtasks().isEmpty(), "Подзадача не была удалена.");
+        Assertions.assertNotNull(inMemoryTaskManager.getEpics(), "Эпик не был добавлен.");
+        Assertions.assertNotNull(inMemoryTaskManager.getSubtasks(), "Подзадача не была добавлена.");
+        inMemoryTaskManager.removeEpic(epic.getId());
+        Assertions.assertTrue(inMemoryTaskManager.getEpics().isEmpty(), "Эпик не был удален.");
+        Assertions.assertTrue(inMemoryTaskManager.getSubtasks().isEmpty(), "Подзадача не была удалена.");
     }
 
     @Test
@@ -92,12 +96,12 @@ class InMemoryTaskManagerTest {
         Epic epic = new Epic("Test addNewEpic", "Test addNewEpic description");
         inMemoryTaskManager.addNewEpic(epic);
         Subtask subtask = new Subtask("Test addNewSubtask", "Test addNewSubtask description",
-                State.NEW, epic.id);
+                State.NEW, epic.getId());
         inMemoryTaskManager.addNewSubtask(subtask);
-        assertNotNull(inMemoryTaskManager.getEpics(), "Эпик не был добавлен.");
-        assertNotNull(inMemoryTaskManager.getSubtasks(), "Подзадача не была добавлена.");
-        inMemoryTaskManager.removeSubtask(subtask.id);
-        assertTrue(inMemoryTaskManager.getSubtasks().isEmpty(), "Подзадача не была удалена.");
+        Assertions.assertNotNull(inMemoryTaskManager.getEpics(), "Эпик не был добавлен.");
+        Assertions.assertNotNull(inMemoryTaskManager.getSubtasks(), "Подзадача не была добавлена.");
+        inMemoryTaskManager.removeSubtask(subtask.getId());
+        Assertions.assertTrue(inMemoryTaskManager.getSubtasks().isEmpty(), "Подзадача не была удалена.");
     }
 
     @Test
@@ -105,18 +109,18 @@ class InMemoryTaskManagerTest {
         Task task = new Task("Test addNewTask", "Test addNewTask description", State.NEW);
         InMemoryTaskManager inMemoryTaskManager = new InMemoryTaskManager();
         inMemoryTaskManager.addNewTask(task);
-        final int taskId = task.id;
+        final int taskId = task.getId();
 
         final Task savedTask = inMemoryTaskManager.getTask(taskId);
 
-        assertNotNull(savedTask, "Задача не найдена.");
-        assertEquals(task, savedTask, "Задачи не совпадают.");
+        Assertions.assertNotNull(savedTask, "Задача не найдена.");
+        Assertions.assertEquals(task, savedTask, "Задачи не совпадают.");
 
         final Map<Integer, Task> tasks = inMemoryTaskManager.getTasks();
 
         assertNotNull(tasks, "Задачи не возвращаются.");
         assertEquals(1, tasks.size(), "Неверное количество задач.");
-        assertEquals(task, tasks.get(1), "Задачи не совпадают.");
+        Assertions.assertEquals(task, tasks.get(1), "Задачи не совпадают.");
     }
 
     @Test
@@ -124,18 +128,18 @@ class InMemoryTaskManagerTest {
         Epic epic = new Epic("Test addNewEpic", "Test addNewEpic description");
         InMemoryTaskManager inMemoryTaskManager = new InMemoryTaskManager();
         inMemoryTaskManager.addNewEpic(epic);
-        final int epicId = epic.id;
+        final int epicId = epic.getId();
 
         final Task savedEpic = inMemoryTaskManager.getEpic(epicId);
 
-        assertNotNull(savedEpic, "Задача не найдена.");
-        assertEquals(epic, savedEpic, "Задачи не совпадают.");
+        Assertions.assertNotNull(savedEpic, "Задача не найдена.");
+        Assertions.assertEquals(epic, savedEpic, "Задачи не совпадают.");
 
         final Map<Integer, Epic> epics = inMemoryTaskManager.getEpics();
 
         assertNotNull(epics, "Задачи не возвращаются.");
         assertEquals(1, epics.size(), "Неверное количество задач.");
-        assertEquals(epic, epics.get(1), "Задачи не совпадают.");
+        Assertions.assertEquals(epic, epics.get(1), "Задачи не совпадают.");
     }
 
     @Test
@@ -146,18 +150,18 @@ class InMemoryTaskManagerTest {
         InMemoryTaskManager inMemoryTaskManager = new InMemoryTaskManager();
         inMemoryTaskManager.addNewEpic(parentEpic);
         inMemoryTaskManager.addNewSubtask(subtask);
-        final int subtaskId = subtask.id;
+        final int subtaskId = subtask.getId();
 
         final Task savedSubtask = inMemoryTaskManager.getSubtask(subtaskId);
 
-        assertNotNull(savedSubtask, "Задача не найдена.");
-        assertEquals(subtask, savedSubtask, "Задачи не совпадают.");
+        Assertions.assertNotNull(savedSubtask, "Задача не найдена.");
+        Assertions.assertEquals(subtask, savedSubtask, "Задачи не совпадают.");
 
         final Map<Integer, Subtask> subtasks = inMemoryTaskManager.getSubtasks();
 
         assertNotNull(subtasks, "Задачи не возвращаются.");
         assertEquals(1, subtasks.size(), "Неверное количество задач.");
-        assertEquals(subtask, subtasks.get(2), "Задачи не совпадают.");
+        Assertions.assertEquals(subtask, subtasks.get(2), "Задачи не совпадают.");
     }
 
     @Test
@@ -166,19 +170,19 @@ class InMemoryTaskManagerTest {
         InMemoryTaskManager inMemoryTaskManager = new InMemoryTaskManager();
         inMemoryTaskManager.addNewTask(task);
         Task updatedTask = new Task("Test updatedTask", "Test updatedTask description",
-                task.id, State.DONE);
+                task.getId(), State.DONE);
         inMemoryTaskManager.updateTask(updatedTask);
 
-        final Task savedUpdatedTask = inMemoryTaskManager.getTask(updatedTask.id);
+        final Task savedUpdatedTask = inMemoryTaskManager.getTask(updatedTask.getId());
 
-        assertNotNull(savedUpdatedTask, "Задача не найдена.");
+        Assertions.assertNotNull(savedUpdatedTask, "Задача не найдена.");
 
         final Map<Integer, Task> tasks = inMemoryTaskManager.getTasks();
 
         assertNotNull(tasks, "Задачи не возвращаются.");
         assertEquals(1, tasks.size(), "Неверное количество задач.");
-        assertEquals(savedUpdatedTask, tasks.get(1), "Обновленные задачи не совпадают.");
-        assertNotEquals(task, tasks.get(1), "Задача не обновилась.");
+        Assertions.assertEquals(savedUpdatedTask, tasks.get(1), "Обновленные задачи не совпадают.");
+        Assertions.assertNotEquals(task, tasks.get(1), "Задача не обновилась.");
     }
 
     @Test
@@ -186,19 +190,19 @@ class InMemoryTaskManagerTest {
         Epic epic = new Epic("Test newEpic", "Test newEpic description");
         InMemoryTaskManager inMemoryTaskManager = new InMemoryTaskManager();
         inMemoryTaskManager.addNewEpic(epic);
-        Epic updatedEpic = new Epic("Test updatedTask", "Test updatedTask description", epic.id);
+        Epic updatedEpic = new Epic("Test updatedTask", "Test updatedTask description", epic.getId());
         inMemoryTaskManager.updateEpic(updatedEpic);
 
-        final Task savedUpdatedEpic = inMemoryTaskManager.getEpic(updatedEpic.id);
+        final Task savedUpdatedEpic = inMemoryTaskManager.getEpic(updatedEpic.getId());
 
-        assertNotNull(savedUpdatedEpic, "Задача не найдена.");
+        Assertions.assertNotNull(savedUpdatedEpic, "Задача не найдена.");
 
         final Map<Integer, Epic> epics = inMemoryTaskManager.getEpics();
 
         assertNotNull(epics, "Задачи не возвращаются.");
         assertEquals(1, epics.size(), "Неверное количество задач.");
-        assertEquals(savedUpdatedEpic, epics.get(1), "Обновленные задачи не совпадают.");
-        assertNotEquals(epic, epics.get(1), "Задача не обновилась.");
+        Assertions.assertEquals(savedUpdatedEpic, epics.get(1), "Обновленные задачи не совпадают.");
+        Assertions.assertNotEquals(epic, epics.get(1), "Задача не обновилась.");
     }
 
     @Test
@@ -209,19 +213,19 @@ class InMemoryTaskManagerTest {
         inMemoryTaskManager.addNewEpic(parentEpic);
         inMemoryTaskManager.addNewSubtask(subtask);
         Subtask updatedSubtask = new Subtask("Test updatedSubtask", "Test updatedSubtask description",
-                subtask.id, State.DONE, subtask.getParentEpicID());
+                subtask.getId(), State.DONE, subtask.getParentEpicID());
         inMemoryTaskManager.updateSubtask(updatedSubtask);
-        final Subtask savedSubtask = inMemoryTaskManager.getSubtask(updatedSubtask.id);
+        final Subtask savedSubtask = inMemoryTaskManager.getSubtask(updatedSubtask.getId());
 
-        assertNotNull(savedSubtask, "Задача не найдена.");
-        assertEquals(updatedSubtask, savedSubtask, "Обновленные задачи не совпадают.");
+        Assertions.assertNotNull(savedSubtask, "Задача не найдена.");
+        Assertions.assertEquals(updatedSubtask, savedSubtask, "Обновленные задачи не совпадают.");
 
         final Map<Integer, Subtask> subtasks = inMemoryTaskManager.getSubtasks();
 
         assertNotNull(subtasks, "Задачи не возвращаются.");
         assertEquals(1, subtasks.size(), "Неверное количество задач.");
-        assertNotEquals(subtask, subtasks.get(2), "Задача не обновилась.");
-        assertEquals(State.DONE, parentEpic.state, "Родительский эпик не обновился.");
+        Assertions.assertNotEquals(subtask, subtasks.get(2), "Задача не обновилась.");
+        Assertions.assertEquals(State.DONE, parentEpic.getState(), "Родительский эпик не обновился.");
     }
 
     @Test
@@ -236,29 +240,29 @@ class InMemoryTaskManagerTest {
         inMemoryTaskManager.addNewSubtask(subtask1);
         inMemoryTaskManager.addNewSubtask(subtask2);
         Subtask updatedSubtask1 = new Subtask("Test updatedSubtask1",
-                "Test updatedSubtask1 description", subtask1.id, State.DONE, subtask1.getParentEpicID());
+                "Test updatedSubtask1 description", subtask1.getId(), State.DONE, subtask1.getParentEpicID());
         inMemoryTaskManager.updateSubtask(updatedSubtask1);
-        final Subtask savedSubtask1 = inMemoryTaskManager.getSubtask(updatedSubtask1.id);
+        final Subtask savedSubtask1 = inMemoryTaskManager.getSubtask(updatedSubtask1.getId());
 
-        assertNotNull(savedSubtask1, "Задача не найдена.");
-        assertEquals(updatedSubtask1, savedSubtask1, "Обновленные задачи не совпадают.");
+        Assertions.assertNotNull(savedSubtask1, "Задача не найдена.");
+        Assertions.assertEquals(updatedSubtask1, savedSubtask1, "Обновленные задачи не совпадают.");
 
         final Map<Integer, Subtask> subtasks = inMemoryTaskManager.getSubtasks();
 
         assertNotNull(subtasks, "Задачи не возвращаются.");
         assertEquals(2, subtasks.size(), "Неверное количество задач.");
-        assertNotEquals(subtask1, subtasks.get(2), "Задача не обновилась.");
-        assertEquals(State.IN_PROGRESS, parentEpic.state, "Родительский эпик не обновился.");
+        Assertions.assertNotEquals(subtask1, subtasks.get(2), "Задача не обновилась.");
+        Assertions.assertEquals(State.IN_PROGRESS, parentEpic.getState(), "Родительский эпик не обновился.");
 
         Subtask updatedSubtask2 = new Subtask("Test updatedSubtask2",
-                "Test updatedSubtask2 description", subtask2.id, State.DONE, subtask2.getParentEpicID());
+                "Test updatedSubtask2 description", subtask2.getId(), State.DONE, subtask2.getParentEpicID());
         inMemoryTaskManager.updateSubtask(updatedSubtask2);
-        final Subtask savedSubtask2 = inMemoryTaskManager.getSubtask(updatedSubtask2.id);
+        final Subtask savedSubtask2 = inMemoryTaskManager.getSubtask(updatedSubtask2.getId());
 
-        assertNotNull(savedSubtask2, "Задача не найдена.");
-        assertEquals(updatedSubtask2, savedSubtask2, "Обновленные задачи не совпадают.");
-        assertNotEquals(subtask2, subtasks.get(3), "Задача не обновилась.");
-        assertEquals(State.DONE, parentEpic.state, "Родительский эпик не обновился.");
+        Assertions.assertNotNull(savedSubtask2, "Задача не найдена.");
+        Assertions.assertEquals(updatedSubtask2, savedSubtask2, "Обновленные задачи не совпадают.");
+        Assertions.assertNotEquals(subtask2, subtasks.get(3), "Задача не обновилась.");
+        Assertions.assertEquals(State.DONE, parentEpic.getState(), "Родительский эпик не обновился.");
     }
 
     @Test
@@ -272,14 +276,14 @@ class InMemoryTaskManagerTest {
         inMemoryTaskManager.addNewEpic(parentEpic2);
         inMemoryTaskManager.addNewSubtask(subtask);
 
-        assertEquals(State.DONE, parentEpic1.state, "Родительский эпик не обновился.");
+        Assertions.assertEquals(State.DONE, parentEpic1.getState(), "Родительский эпик не обновился.");
 
         Subtask updatedSubtask = new Subtask("Test updatedSubtask",
-                "Test updatedSubtask description", subtask.id, State.DONE, parentEpic2.id);
+                "Test updatedSubtask description", subtask.getId(), State.DONE, parentEpic2.getId());
         inMemoryTaskManager.updateSubtask(updatedSubtask);
 
-        assertEquals(State.NEW, parentEpic1.state, "Старый родительский эпик не обновился.");
-        assertEquals(State.DONE, parentEpic2.state, "Новый родительский эпик не обновился.");
+        Assertions.assertEquals(State.NEW, parentEpic1.getState(), "Старый родительский эпик не обновился.");
+        Assertions.assertEquals(State.DONE, parentEpic2.getState(), "Новый родительский эпик не обновился.");
     }
 
     @Test
@@ -296,25 +300,25 @@ class InMemoryTaskManagerTest {
         inMemoryTaskManager.addNewSubtask(subtask1);
         inMemoryTaskManager.addNewSubtask(subtask2);
 
-        assertEquals(State.IN_PROGRESS, parentEpic1.state, "Родительский эпик не обновился.");
+        Assertions.assertEquals(State.IN_PROGRESS, parentEpic1.getState(), "Родительский эпик не обновился.");
 
         Subtask updatedSubtask1 = new Subtask("Test updatedSubtask1",
-                "Test updatedSubtask1 description", subtask1.id, State.IN_PROGRESS, parentEpic2.id);
+                "Test updatedSubtask1 description", subtask1.getId(), State.IN_PROGRESS, parentEpic2.getId());
         inMemoryTaskManager.updateSubtask(updatedSubtask1);
 
-        assertEquals(State.DONE, parentEpic1.state, "Старый родительский эпик не обновился.");
-        assertEquals(State.IN_PROGRESS, parentEpic2.state, "Новый родительский эпик не обновился.");
+        Assertions.assertEquals(State.DONE, parentEpic1.getState(), "Старый родительский эпик не обновился.");
+        Assertions.assertEquals(State.IN_PROGRESS, parentEpic2.getState(), "Новый родительский эпик не обновился.");
 
         Subtask updatedSubtask2 = new Subtask("Test updatedSubtask2",
-                "Test updatedSubtask2 description", subtask2.id, State.DONE, parentEpic2.id);
+                "Test updatedSubtask2 description", subtask2.getId(), State.DONE, parentEpic2.getId());
         inMemoryTaskManager.updateSubtask(updatedSubtask2);
 
-        assertEquals(State.NEW, parentEpic1.state, "Старый родительский эпик не обновился.");
+        Assertions.assertEquals(State.NEW, parentEpic1.getState(), "Старый родительский эпик не обновился.");
 
         Subtask twiceUpdatedSubtask1 = new Subtask("Test twiceUpdatedSubtask1",
-                "Test twiceUpdatedSubtask1 description", subtask1.id, State.DONE, parentEpic2.id);
+                "Test twiceUpdatedSubtask1 description", subtask1.getId(), State.DONE, parentEpic2.getId());
         inMemoryTaskManager.updateSubtask(twiceUpdatedSubtask1);
 
-        assertEquals(State.DONE, parentEpic2.state, "Новый родительский эпик не обновился.");
+        Assertions.assertEquals(State.DONE, parentEpic2.getState(), "Новый родительский эпик не обновился.");
     }
 }

@@ -1,6 +1,25 @@
+package taskclasses;
+
 public class Task {
     protected String name;
     protected String description;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
     protected int id = 0;
     protected State state;
 

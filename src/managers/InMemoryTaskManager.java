@@ -1,3 +1,10 @@
+package managers;
+
+import taskclasses.Epic;
+import taskclasses.State;
+import taskclasses.Subtask;
+import taskclasses.Task;
+
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,24 +72,28 @@ public class InMemoryTaskManager implements TaskManager {
         }
         return subtasksForEpic;
     }
+
     @Override
     public void removeTask(int id) {
             tasks.remove(id);
+            historyManager.removeTask(id);
     }
 
     @Override
     public void removeEpic(int id) {
         for (Integer subtaskID : epics.get(id).getSubtasksID()) {
             subtasks.remove(subtaskID);
+            historyManager.removeTask(subtaskID);
         }
         epics.remove(id);
+        historyManager.removeTask(id);
     }
 
     @Override
     public void removeSubtask(int id) {
         Subtask subtask = subtasks.get(id);
         Epic parentEpic = epics.get(subtask.getParentEpicID());
-        List<Integer> subtasksID= parentEpic.getSubtasksID();
+        List<Integer> subtasksID = parentEpic.getSubtasksID();
 
         for (Integer subID: subtasksID) {
             if (subID == id) {
@@ -91,56 +102,57 @@ public class InMemoryTaskManager implements TaskManager {
             }
         }
         subtasks.remove(id);
+        historyManager.removeTask(id);
         checkEpicState(parentEpic);
     }
 
     @Override
     public void addNewTask(Task task) {
-        task.id = generateID();
-        tasks.put(task.id, task);
+        task.setId(generateID());
+        tasks.put(task.getId(), task);
     }
 
     @Override
     public void addNewEpic(Epic epic) {
-        epic.id = generateID();
-        epics.put(epic.id, epic);
+        epic.setId(generateID());
+        epics.put(epic.getId(), epic);
     }
 
     @Override
     public void addNewSubtask(Subtask subtask) {
-        subtask.id = generateID();
+        subtask.setId(generateID());
         Epic parentEpic = epics.get(subtask.getParentEpicID());
-        List<Integer> subtasksID= parentEpic.getSubtasksID();
-        subtasksID.add(subtask.id);
-        subtasks.put(subtask.id, subtask);
+        List<Integer> subtasksID = parentEpic.getSubtasksID();
+        subtasksID.add(subtask.getId());
+        subtasks.put(subtask.getId(), subtask);
 
         checkEpicState(parentEpic);
     }
 
     @Override
     public void updateTask(Task task) {
-        tasks.replace(task.id, task);
+        tasks.replace(task.getId(), task);
     }
 
     @Override
     public void updateEpic(Epic epic) {
-        epics.replace(epic.id, epic);
+        epics.replace(epic.getId(), epic);
     }
 
     @Override
     public void updateSubtask(Subtask subtask) {
-        Subtask oldSubtask = subtasks.get(subtask.id);
+        Subtask oldSubtask = subtasks.get(subtask.getId());
         Epic oldParentEpic = epics.get(oldSubtask.getParentEpicID());
-        oldParentEpic.getSubtasksID().remove((Object) subtask.id);
-        subtasks.replace(subtask.id, subtask);
+        oldParentEpic.getSubtasksID().remove((Object) subtask.getId());
+        subtasks.replace(subtask.getId(), subtask);
         Epic newParentEpic = epics.get(subtask.getParentEpicID());
-        newParentEpic.getSubtasksID().add(subtask.id);
+        newParentEpic.getSubtasksID().add(subtask.getId());
         checkEpicState(oldParentEpic);
         checkEpicState(newParentEpic);
     }
 
     @Override
-    public int generateID(){
+    public int generateID() {
         return counter++;
     }
 
@@ -148,15 +160,15 @@ public class InMemoryTaskManager implements TaskManager {
     public void checkEpicState(Epic epic) {
         ArrayList<State> epicSubtasksStates = new ArrayList<>();
         for (Integer subID : epic.getSubtasksID()) {
-            epicSubtasksStates.add(subtasks.get(subID).state);
+            epicSubtasksStates.add(subtasks.get(subID).getState());
         }
         if (!(epicSubtasksStates.contains(State.DONE) ||
                 epicSubtasksStates.contains(State.IN_PROGRESS))) {
-            epic.state = State.NEW;
+            epic.setState(State.NEW);
         } else if (!(epicSubtasksStates.contains(State.NEW) ||
                 epicSubtasksStates.contains(State.IN_PROGRESS))) {
-            epic.state = State.DONE;
-        } else epic.state = State.IN_PROGRESS;
+            epic.setState(State.DONE);
+        } else epic.setState(State.IN_PROGRESS);
     }
 
     @Override

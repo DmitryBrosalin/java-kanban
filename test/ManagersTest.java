@@ -1,5 +1,7 @@
 import org.junit.jupiter.api.Test;
 
+import managers.*;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class ManagersTest {
