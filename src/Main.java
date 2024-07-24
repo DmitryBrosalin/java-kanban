@@ -1,11 +1,12 @@
 import managers.*;
 import taskclasses.*;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
-        TaskManager taskManager = Managers.getDefault();
+    public static void main(String[] args) throws IOException {
+        TaskManager taskManager = new FileBackedTaskManager();
         Scanner scanner = new Scanner(System.in);
         boolean isWorking = true;
 

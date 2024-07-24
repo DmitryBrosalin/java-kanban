@@ -4,6 +4,16 @@ public class Task {
     protected String name;
     protected String description;
 
+    public TaskType getTaskType() {
+        return taskType;
+    }
+
+    public void setTaskType(TaskType taskType) {
+        this.taskType = taskType;
+    }
+
+    protected TaskType taskType;
+
     public int getId() {
         return id;
     }
@@ -27,6 +37,7 @@ public class Task {
         this.name = name;
         this.description = description;
         this.state = state;
+        this.taskType = TaskType.TASK;
     }
 
     public Task(String name, String description, int id, State state) {
@@ -34,15 +45,16 @@ public class Task {
         this.description = description;
         this.id = id;
         this.state = state;
+        this.taskType = TaskType.TASK;
     }
 
     @Override
     public String toString() {
-        return "Задача - " +
-                "Название: '" + name + '\'' +
-                ", Описание: '" + description + '\'' +
-                ", id: " + id +
-                ", Статус: " + state + "\n";
+        return taskType + "," +
+                name + "," +
+                description + "," +
+                id + "," +
+                state + "\n";
     }
 
     @Override
