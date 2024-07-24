@@ -29,7 +29,7 @@ public class Subtask extends Task {
                 name + "," +
                 description + "," +
                 id + "," +
-                state + ","+
+                state + "," +
                 parentEpicID + "\n";
     }
 
