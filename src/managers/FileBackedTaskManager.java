@@ -6,30 +6,29 @@ import taskclasses.Subtask;
 import taskclasses.Task;
 
 import java.io.*;
-import java.nio.file.Paths;
 
 public class FileBackedTaskManager extends InMemoryTaskManager {
-    File backedListOfTasks;
+    private File backedListOfTasks;
 
-    public FileBackedTaskManager() throws IOException {
-        super();
-        backedListOfTasks = Paths.get("backedListOfTasks.txt").toFile();
-        loadFromFile(backedListOfTasks);
+    public FileBackedTaskManager(File file) throws IOException {
+        backedListOfTasks = file;
     }
 
-    public void loadFromFile(File file) {
+    public static FileBackedTaskManager loadFromFile(File file) throws IOException {
+        FileBackedTaskManager fileBackedTaskManager= new FileBackedTaskManager (file);
         try (BufferedReader bufferReader = new BufferedReader(new FileReader(file))) {
             while (bufferReader.ready()) {
                 String task = bufferReader.readLine();
-                getTaskFromString(task);
-                counter++;
+                fileBackedTaskManager.getTaskFromString(task);
+                fileBackedTaskManager.counter++;
             }
         } catch (IOException ex) {
-            System.out.println("Произошла ошибка во время чтения файла.");
+            throw new ManagerSaveException("Произошла ошибка при чтении файла.");
         }
+    return fileBackedTaskManager;
     }
 
-    public void getTaskFromString(String stringTask) {
+    private void getTaskFromString(String stringTask) {
         String[] taskProperties = stringTask.split(",");
         switch (taskProperties[0]) {
             case "TASK" -> {
@@ -62,7 +61,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         }
     }
 
-    public void save() {
+    private void save() {
         try (Writer fileWriter = new FileWriter("backedListOfTasks.txt")) {
             for (Task task: tasks.values()) {
                 fileWriter.write(task.toString());
@@ -74,7 +73,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
                 fileWriter.write(subtask.toString());
             }
         } catch (IOException e) {
-            System.out.println("Произошла ошибка во время записи файла.");
+            throw new ManagerSaveException("Произошла ошибка во время записи файла.");
         }
     }
 
