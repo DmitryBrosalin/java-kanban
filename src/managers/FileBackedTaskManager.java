@@ -15,7 +15,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
     }
 
     public static FileBackedTaskManager loadFromFile(File file) throws IOException {
-        FileBackedTaskManager fileBackedTaskManager= new FileBackedTaskManager (file);
+        FileBackedTaskManager fileBackedTaskManager = new FileBackedTaskManager(file);
         try (BufferedReader bufferReader = new BufferedReader(new FileReader(file))) {
             while (bufferReader.ready()) {
                 String task = bufferReader.readLine();
