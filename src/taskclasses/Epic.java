@@ -10,32 +10,28 @@ public class Epic extends Task {
     public Epic(String name, String description) {
         super(name, description, State.NEW);
         subtasksID = new ArrayList<>();
+        this.taskType = TaskType.EPIC;
     }
 
     public Epic(String name, String description, int id) {
         super(name, description, id, State.NEW);
         subtasksID = new ArrayList<>();
+        this.taskType = TaskType.EPIC;
+    }
+
+    public Epic(String name, String description, int id, State state) {
+        super(name, description, id, state);
+        subtasksID = new ArrayList<>();
+        this.taskType = TaskType.EPIC;
     }
 
     public List<Integer> getSubtasksID() {
         return subtasksID;
     }
 
-    public void setSubtasksID(ArrayList<Integer> subtasksID) {
-        this.subtasksID = subtasksID;
+    public void addSubtasksID(Integer subtaskID) {
+        this.subtasksID.add(subtaskID);
     }
-
-    @Override
-    public String toString() {
-        return "Эпик - " +
-                "Название: '" + name + '\'' +
-                ", Описание: '" + description + '\'' +
-                ", id: " + id +
-                ", Статус: " + state +
-                ", состоит из следующих подзадач (ID):\n" + subtasksID + "\n";//
-
-    }
-
 
     @Override
     public boolean equals(Object o) {

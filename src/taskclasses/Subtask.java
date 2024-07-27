@@ -6,11 +6,13 @@ public class Subtask extends Task {
     public Subtask(String name, String description, State state, int parentEpicID) {
         super(name, description, state);
         this.parentEpicID = parentEpicID;
+        this.taskType = TaskType.SUBTASK;
     }
 
     public Subtask(String name, String description, int id, State state, int parentEpicID) {
         super(name, description, id, state);
         this.parentEpicID = parentEpicID;
+        this.taskType = TaskType.SUBTASK;
     }
 
     public int getParentEpicID() {
@@ -23,12 +25,12 @@ public class Subtask extends Task {
 
     @Override
     public String toString() {
-        return "Подзадача - " +
-                "Название: '" + name + '\'' +
-                ", Описание: '" + description + '\'' +
-                ", id родительского Эпика: " + parentEpicID + ", " +
-                ", id: " + id +
-                ", Статус: " + state + "\n";
+        return taskType + "," +
+                name + "," +
+                description + "," +
+                id + "," +
+                state + "," +
+                parentEpicID + "\n";
     }
 
     @Override
