@@ -272,7 +272,7 @@ public class Main {
     }
 
     public static LocalDateTime scanDateTime(Scanner scanner) {
-        while(true) {
+        while (true) {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd.MM.yy");
             String stringDateTime = scanner.nextLine();
             try {
