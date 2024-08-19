@@ -8,6 +8,11 @@ public class InMemoryHistoryManager implements HistoryManager {
     private Node<Task> head;
     private Node<Task> tail;
     private int size = 0;
+
+    public Map<Integer, Node<Task>> getIdConnectedToNodes() {
+        return idConnectedToNodes;
+    }
+
     Map<Integer, Node<Task>> idConnectedToNodes;
 
     @Override

@@ -1,15 +1,38 @@
 package taskclasses;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Task {
+    final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd.MM.yy");
     protected String name;
     protected String description;
+    protected Duration duration;
+    protected LocalDateTime startTime;
+
+    public Duration getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Duration duration) {
+        this.duration = duration;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        return startTime.plus(duration);
+    }
 
     public TaskType getTaskType() {
         return taskType;
-    }
-
-    public void setTaskType(TaskType taskType) {
-        this.taskType = taskType;
     }
 
     protected TaskType taskType;
@@ -48,13 +71,34 @@ public class Task {
         this.taskType = TaskType.TASK;
     }
 
+    public Task(String name, String description, State state, LocalDateTime startTime, Duration duration) {
+        this.name = name;
+        this.description = description;
+        this.state = state;
+        this.taskType = TaskType.TASK;
+        this.startTime = startTime;
+        this.duration = duration;
+    }
+
+    public Task(String name, String description, int id, State state, LocalDateTime startTime, Duration duration) {
+        this.name = name;
+        this.description = description;
+        this.id = id;
+        this.state = state;
+        this.taskType = TaskType.TASK;
+        this.startTime = startTime;
+        this.duration = duration;
+    }
+
     @Override
     public String toString() {
         return taskType + "," +
                 name + "," +
                 description + "," +
                 id + "," +
-                state + "\n";
+                state + "," +
+                startTime.format(formatter) + "," +
+                duration.toMinutes() + "\n";
     }
 
     @Override

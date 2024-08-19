@@ -6,8 +6,11 @@ import taskclasses.Task;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public interface TaskManager {
+    Set<Task> getPrioritizedTasks();
+
     Map<Integer, Task> getTasks();
 
     Map<Integer, Epic> getEpics();
@@ -46,8 +49,12 @@ public interface TaskManager {
 
     void checkEpicState(Epic epic);
 
+    void checkEpicTime(Epic epic);
+
     List<Task> getHistory();
 
     void addToHistory(Task task);
+
+    boolean causesTimeConflict(Task t1, Task t2);
 }
 

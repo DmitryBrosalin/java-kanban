@@ -3,7 +3,11 @@ import taskclasses.*;
 
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.Duration;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -140,6 +144,14 @@ public class Main {
                         System.out.println(taskManager.getHistory());
                     }
                     break;
+                case 9:
+                    if (taskManager.getPrioritizedTasks().isEmpty()) {
+                        System.out.println("Список задач в порядке приоритета пуст.");
+                        break;
+                    } else {
+                        System.out.println(taskManager.getPrioritizedTasks());
+                    }
+                    break;
                 case 0:
                     isWorking = false;
                     break;
@@ -154,7 +166,11 @@ public class Main {
         System.out.println("Введите описание задачи.");
         String description = scanString(scanner);
         State state = scanState(scanner);
-        return new Task(name, description, state);
+        System.out.println("Введите время и дату старта задачи в формате:\nHH:mm dd.MM.yy");
+        LocalDateTime startTime = scanDateTime(scanner);
+        System.out.println("Введите длительность задачи в минутах.");
+        Duration duration = scanDuration(scanner);
+        return new Task(name, description, state,startTime, duration);
     }
 
     public static  Epic scanEpic(Scanner scanner) {
@@ -182,7 +198,11 @@ public class Main {
         System.out.println("Введите описание подзадачи.");
         String description = scanString(scanner);
         State state = scanState(scanner);
-        return new Subtask(name, description, state, parentEpicId);
+        System.out.println("Введите время и дату старта задачи в формате:\nHH:mm dd.MM.yy");
+        LocalDateTime startTime = scanDateTime(scanner);
+        System.out.println("Введите длительность задачи в минутах.");
+        Duration duration = scanDuration(scanner);
+        return new Subtask(name, description, state, parentEpicId, startTime, duration);
     }
 
     public static void updateTask(int id, TaskManager inMemoryTaskManager, Scanner scanner) {
@@ -204,7 +224,7 @@ public class Main {
     public static int scanCommand(Scanner scanner) {
         while (true) {
         int cmd = scanNumber(scanner);
-            if (cmd < 0 || cmd > 8) {
+            if (cmd < 0 || cmd > 9) {
                 System.out.println("Команды " + cmd + " нет. Попробуйте еще раз.");
             } else {
                 return cmd;
@@ -251,6 +271,24 @@ public class Main {
         return exceptionTest;
     }
 
+    public static LocalDateTime scanDateTime(Scanner scanner) {
+        while(true) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd.MM.yy");
+            String stringDateTime = scanner.nextLine();
+            try {
+                LocalDateTime localDateTime = LocalDateTime.parse(stringDateTime, formatter);
+                return localDateTime;
+            } catch (DateTimeParseException e) {
+                System.out.println("Необходимо дату и время в формате:\nHH:mm dd.MM.yy");
+            }
+        }
+    }
+
+    public static Duration scanDuration(Scanner scanner) {
+        int durationInt = scanNumber(scanner);
+        return Duration.ofMinutes(durationInt);
+    }
+
     public static String scanString(Scanner scanner) {
         while (true) {
             String string = scanner.nextLine();
@@ -284,6 +322,7 @@ public class Main {
         System.out.println("6. Удалить все задачи.");
         System.out.println("7. Получить список подзадач эпика по идентификатору.");
         System.out.println("8. Получить историю просмотренных задач.");
+        System.out.println("9. Получить список задач в порядке приоритета.");
         System.out.println("0. Выход.");
     }
 
