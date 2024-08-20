@@ -16,6 +16,12 @@ public class InMemoryTaskManager implements TaskManager {
     protected HashMap<Integer, Subtask> subtasks;
     protected int counter;
     protected HistoryManager historyManager;
+    Comparator<Task> comparator = new Comparator<Task>() {
+        @Override
+        public int compare(Task t1, Task t2) {
+            return t1.getStartTime().compareTo(t2.getStartTime());
+        }
+    };
 
     public InMemoryTaskManager() {
         tasks = new HashMap<>();
@@ -23,12 +29,6 @@ public class InMemoryTaskManager implements TaskManager {
         subtasks = new HashMap<>();
         counter = 1;
         historyManager = Managers.getDefaultHistory();
-        Comparator<Task> comparator = new Comparator<Task>() {
-            @Override
-            public int compare(Task t1, Task t2) {
-                return t1.getStartTime().compareTo(t2.getStartTime());
-            }
-        };
         prioritizedTasks = new TreeSet<>(comparator);
     }
 
@@ -173,7 +173,6 @@ public class InMemoryTaskManager implements TaskManager {
             Subtask oldSubtask = subtasks.get(subtask.getId());
             Epic oldParentEpic = epics.get(oldSubtask.getParentEpicID());
             oldParentEpic.getSubtasksID().remove((Object) subtask.getId());
-            prioritizedTasks.remove(subtasks.get(subtask.getId()));
             prioritizedTasks.add(subtask);
             subtasks.replace(subtask.getId(), subtask);
             Epic newParentEpic = epics.get(subtask.getParentEpicID());
@@ -190,8 +189,7 @@ public class InMemoryTaskManager implements TaskManager {
         return counter++;
     }
 
-    @Override
-    public void checkEpicState(Epic epic) {
+    protected void checkEpicState(Epic epic) {
         List<State> epicSubtasksStates = epic.getSubtasksID().stream()
                 .map(subID -> subtasks.get(subID).getState())
                 .toList();
@@ -204,8 +202,7 @@ public class InMemoryTaskManager implements TaskManager {
         } else epic.setState(State.IN_PROGRESS);
     }
 
-    @Override
-    public void checkEpicTime(Epic epic) {
+    protected void checkEpicTime(Epic epic) {
         if (!epic.getSubtasksID().isEmpty()) {
             List<Subtask> epicSubtasks = epic.getSubtasksID().stream()
                     .map(subID -> subtasks.get(subID))
@@ -240,11 +237,12 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public TreeSet<Task> getPrioritizedTasks() {
-        return prioritizedTasks;
+        TreeSet<Task> copyOfPrioritizedTasks = new TreeSet<>(comparator);
+        copyOfPrioritizedTasks.addAll(prioritizedTasks);
+        return copyOfPrioritizedTasks;
     }
 
-    @Override
-    public boolean causesTimeConflict(Task t1, Task t2) {
+    protected boolean causesTimeConflict(Task t1, Task t2) {
         return t2.getStartTime().isAfter(t1.getStartTime()) && t2.getStartTime().isBefore(t1.getEndTime())
                 || t2.getEndTime().isAfter(t1.getStartTime()) && t2.getEndTime().isBefore(t1.getEndTime())
                 || t1.getStartTime().isAfter(t2.getStartTime()) && t1.getStartTime().isBefore(t2.getEndTime())

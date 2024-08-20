@@ -47,14 +47,8 @@ public interface TaskManager {
 
     int generateID();
 
-    void checkEpicState(Epic epic);
-
-    void checkEpicTime(Epic epic);
-
     List<Task> getHistory();
 
     void addToHistory(Task task);
-
-    boolean causesTimeConflict(Task t1, Task t2);
 }
 
