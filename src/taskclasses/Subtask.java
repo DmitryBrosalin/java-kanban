@@ -1,12 +1,18 @@
 package taskclasses;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 public class Subtask extends Task {
     private int parentEpicID;
 
-    public Subtask(String name, String description, State state, int parentEpicID) {
+    public Subtask(String name, String description, State state, int parentEpicID,
+                   LocalDateTime startTime, Duration duration) {
         super(name, description, state);
         this.parentEpicID = parentEpicID;
         this.taskType = TaskType.SUBTASK;
+        this.startTime = startTime;
+        this.duration = duration;
     }
 
     public Subtask(String name, String description, int id, State state, int parentEpicID) {
@@ -15,12 +21,23 @@ public class Subtask extends Task {
         this.taskType = TaskType.SUBTASK;
     }
 
-    public int getParentEpicID() {
-        return parentEpicID;
+    public Subtask(String name, String description, State state, int parentEpicID) {
+        super(name, description, state);
+        this.parentEpicID = parentEpicID;
+        this.taskType = TaskType.SUBTASK;
     }
 
-    public void setParentEpicID(int parentEpicID) {
+    public Subtask(String name, String description, int id, State state, int parentEpicID,
+                   LocalDateTime startTime, Duration duration) {
+        super(name, description, id, state);
         this.parentEpicID = parentEpicID;
+        this.taskType = TaskType.SUBTASK;
+        this.startTime = startTime;
+        this.duration = duration;
+    }
+
+    public int getParentEpicID() {
+        return parentEpicID;
     }
 
     @Override
@@ -30,7 +47,9 @@ public class Subtask extends Task {
                 description + "," +
                 id + "," +
                 state + "," +
-                parentEpicID + "\n";
+                parentEpicID + "," +
+                startTime.format(formatter) + "," +
+                duration.toMinutes() + "\n";
     }
 
     @Override

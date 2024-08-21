@@ -6,6 +6,9 @@ import taskclasses.Subtask;
 import taskclasses.Task;
 
 import java.io.*;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class FileBackedTaskManager extends InMemoryTaskManager {
     private File backedListOfTasks;
@@ -16,15 +19,15 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
 
     public static FileBackedTaskManager loadFromFile(File file) throws IOException {
         FileBackedTaskManager fileBackedTaskManager = new FileBackedTaskManager(file);
-        try (BufferedReader bufferReader = new BufferedReader(new FileReader(file))) {
-            while (bufferReader.ready()) {
-                String task = bufferReader.readLine();
-                fileBackedTaskManager.getTaskFromString(task);
-                fileBackedTaskManager.counter++;
+            try (BufferedReader bufferReader = new BufferedReader(new FileReader(file))) {
+                while (bufferReader.ready()) {
+                    String task = bufferReader.readLine();
+                    fileBackedTaskManager.getTaskFromString(task);
+                    fileBackedTaskManager.counter++;
+                }
+            } catch (IOException ex) {
+                throw new ManagerSaveException("Произошла ошибка при чтении файла.");
             }
-        } catch (IOException ex) {
-            throw new ManagerSaveException("Произошла ошибка при чтении файла.");
-        }
     return fileBackedTaskManager;
     }
 
@@ -33,11 +36,14 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         switch (taskProperties[0]) {
             case "TASK" -> {
                 Task task = new Task(taskProperties[1], taskProperties[2], Integer.parseInt(taskProperties[3]),
-                        State.valueOf(taskProperties[4]));
+                        State.valueOf(taskProperties[4]),
+                        LocalDateTime.parse(taskProperties[5], DateTimeFormatter.ofPattern("HH:mm dd.MM.yy")),
+                        Duration.ofMinutes(Integer.parseInt(taskProperties[6])));
                 tasks.put(task.getId(), task);
                 if (!task.getState().equals(State.NEW)) {
                     historyManager.addToHistory(task);
                 }
+                prioritizedTasks.add(task);
             }
             case "EPIC" -> {
                 Epic epic = new Epic(taskProperties[1], taskProperties[2], Integer.parseInt(taskProperties[3]),
@@ -49,20 +55,24 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
             }
             case "SUBTASK" -> {
                 Subtask subtask = new Subtask(taskProperties[1], taskProperties[2], Integer.parseInt(taskProperties[3]),
-                        State.valueOf(taskProperties[4]), Integer.parseInt(taskProperties[5]));
+                        State.valueOf(taskProperties[4]), Integer.parseInt(taskProperties[5]),
+                        LocalDateTime.parse(taskProperties[6], DateTimeFormatter.ofPattern("HH:mm dd.MM.yy")),
+                        Duration.ofMinutes(Integer.parseInt(taskProperties[7])));
                 Epic parentEpic = epics.get(subtask.getParentEpicID());
                 parentEpic.addSubtasksID(subtask.getId());
                 subtasks.put(subtask.getId(), subtask);
+                checkEpicTime(parentEpic);
                 if (!subtask.getState().equals(State.NEW)) {
                     historyManager.addToHistory(subtask);
                     historyManager.addToHistory(parentEpic);
                 }
+                prioritizedTasks.add(subtask);
             }
         }
     }
 
     private void save() {
-        try (Writer fileWriter = new FileWriter("backedListOfTasks.txt")) {
+        try (Writer fileWriter = new FileWriter(backedListOfTasks)) {
             for (Task task: tasks.values()) {
                 fileWriter.write(task.toString());
             }

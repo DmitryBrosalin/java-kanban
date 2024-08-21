@@ -6,8 +6,11 @@ import taskclasses.Task;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public interface TaskManager {
+    Set<Task> getPrioritizedTasks();
+
     Map<Integer, Task> getTasks();
 
     Map<Integer, Epic> getEpics();
@@ -43,8 +46,6 @@ public interface TaskManager {
     void updateSubtask(Subtask subtask);
 
     int generateID();
-
-    void checkEpicState(Epic epic);
 
     List<Task> getHistory();
 
