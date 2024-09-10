@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="334a662c-08f3-40df-9f93-e2ae649932c4" name="Changes" comment="Sprint 8 HomeWork.ver2&#10;- Изменил модификаторы доступа на protected в методах:&#10;checkEpicTime&#10;checkEpicState&#10;causesTimeConflict&#10;- getPrioritizedTasks теперь возвращает копию&#10;- Изменил модификатор доступа на protected у поля DateTimeFormatter&#10;- Добавил удаление файла в тестах через @AfterEach">
-      <change beforePath="$PROJECT_DIR$/backedListOfTasks.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/java-kanban.iml" beforeDir="false" afterPath="$PROJECT_DIR$/java-kanban.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/managers/FileBackedTaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managers/FileBackedTaskManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/managers/InMemoryTaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managers/InMemoryTaskManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/managers/ManagerSaveException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/exceptions/ManagerSaveException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/taskclasses/Subtask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/taskclasses/Subtask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/taskclasses/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/taskclasses/Task.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/FileBackedTaskManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/FileBackedTaskManagerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/TaskManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/TaskManagerTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="334a662c-08f3-40df-9f93-e2ae649932c4" name="Changes" comment="Sprint 9 HomeWork.ver1&#10;- Реализован API.&#10;- Добавлены новые тесты для обработчиков." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -432,7 +421,15 @@
       <option name="project" value="LOCAL" />
       <updated>1724139580665</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Sprint 9 HomeWork.ver1&#10;- Реализован API.&#10;- Добавлены новые тесты для обработчиков.">
+      <option name="closed" value="true" />
+      <created>1725983996061</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1725983996062</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -485,7 +482,8 @@
     <MESSAGE value="Sprint 7 HomeWork.ver2&#10;Добавил кастомное исключение при ошибках.&#10;Переделал работу метода loadFromFile - теперь он статический, а также возвращает экземпляр FileBackedTaskManager." />
     <MESSAGE value="Sprint 8 HomeWork.ver1&#10;Добавил дату и время старта задачи и продолжительность.&#10;Добавил функцию вывода задач в порядке приоритета.&#10;Добавил проверку пересечений по времени.&#10;Добавил новые тесты." />
     <MESSAGE value="Sprint 8 HomeWork.ver2&#10;- Изменил модификаторы доступа на protected в методах:&#10;checkEpicTime&#10;checkEpicState&#10;causesTimeConflict&#10;- getPrioritizedTasks теперь возвращает копию&#10;- Изменил модификатор доступа на protected у поля DateTimeFormatter&#10;- Добавил удаление файла в тестах через @AfterEach" />
-    <option name="LAST_COMMIT_MESSAGE" value="Sprint 8 HomeWork.ver2&#10;- Изменил модификаторы доступа на protected в методах:&#10;checkEpicTime&#10;checkEpicState&#10;causesTimeConflict&#10;- getPrioritizedTasks теперь возвращает копию&#10;- Изменил модификатор доступа на protected у поля DateTimeFormatter&#10;- Добавил удаление файла в тестах через @AfterEach" />
+    <MESSAGE value="Sprint 9 HomeWork.ver1&#10;- Реализован API.&#10;- Добавлены новые тесты для обработчиков." />
+    <option name="LAST_COMMIT_MESSAGE" value="Sprint 9 HomeWork.ver1&#10;- Реализован API.&#10;- Добавлены новые тесты для обработчиков." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/java_kanban$InMemoryTaskManagerTest.ic" NAME="InMemoryTaskManagerTest Coverage Results" MODIFIED="1717270522520" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

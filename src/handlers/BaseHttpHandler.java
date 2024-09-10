@@ -21,7 +21,9 @@ public class BaseHttpHandler implements HttpHandler {
     }
 
     @Override
-    public void handle(HttpExchange exchange) throws IOException {}
+    public void handle(HttpExchange exchange) throws IOException {
+
+    }
 
     protected void sendText(HttpExchange exchange, int code, String text) throws IOException {
         byte[] response = text.getBytes(DEFAULT_CHARSET);
