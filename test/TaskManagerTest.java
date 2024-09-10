@@ -1,3 +1,4 @@
+import exceptions.TimeConflictException;
 import managers.TaskManager;
 import taskclasses.Epic;
 import taskclasses.State;
@@ -23,8 +24,16 @@ abstract class TaskManagerTest {
         tasks.put(task1.getId(), task1);
         tasks.put(task3.getId(), task3);
         taskManager.addNewTask(task1);
-        taskManager.addNewTask(task2);
-        taskManager.addNewTask(task3);
+        try {
+            taskManager.addNewTask(task2);
+        } catch (TimeConflictException e) {
+
+        }
+        try {
+            taskManager.addNewTask(task3);
+        } catch (TimeConflictException e) {
+
+        }
         Map<Integer, Task> savedTasks = taskManager.getTasks();
         Task savedTask1 = taskManager.getTask(task1.getId());
         assertNotNull(savedTask1, "Ошибка при сохранении или возврате задачи");
@@ -383,12 +392,36 @@ abstract class TaskManagerTest {
         Task task7 = new Task("Test addNewTask7", "Test addNewTask7 description", State.NEW,
                 LocalDateTime.of(2024, 8, 15, 14, 30), Duration.ofMinutes(30));
         taskManager.addNewTask(task1);
-        taskManager.addNewTask(task2);
+        try {
+            taskManager.addNewTask(task2);
+        } catch (TimeConflictException e) {
+
+        }
+        try {
         taskManager.addNewTask(task3);
+        } catch (TimeConflictException e) {
+
+        }
+        try {
         taskManager.addNewTask(task4);
+        } catch (TimeConflictException e) {
+
+        }
+        try {
         taskManager.addNewTask(task5);
+        } catch (TimeConflictException e) {
+
+        }
+        try {
         taskManager.addNewTask(task6);
+        } catch (TimeConflictException e) {
+
+        }
+        try {
         taskManager.addNewTask(task7);
+        } catch (TimeConflictException e) {
+
+        }
 
         Set<Task> expectedPrioritizedTasks = new LinkedHashSet<>();
         expectedPrioritizedTasks.add(task7);

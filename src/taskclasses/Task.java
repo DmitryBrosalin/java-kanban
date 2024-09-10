@@ -5,11 +5,21 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Task {
-    protected final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd.MM.yy");
     protected String name;
     protected String description;
     protected Duration duration;
     protected LocalDateTime startTime;
+    protected TaskType taskType;
+    protected int id = 0;
+    protected State state;
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
 
     public Duration getDuration() {
         return duration;
@@ -35,8 +45,6 @@ public class Task {
         return taskType;
     }
 
-    protected TaskType taskType;
-
     public int getId() {
         return id;
     }
@@ -52,9 +60,6 @@ public class Task {
     public void setState(State state) {
         this.state = state;
     }
-
-    protected int id = 0;
-    protected State state;
 
     public Task(String name, String description, State state) {
         this.name = name;
@@ -92,6 +97,7 @@ public class Task {
 
     @Override
     public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd.MM.yy");
         return taskType + "," +
                 name + "," +
                 description + "," +

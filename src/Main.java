@@ -1,7 +1,9 @@
+import com.sun.net.httpserver.HttpServer;
 import managers.*;
 import taskclasses.*;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.nio.file.Paths;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
@@ -56,13 +58,10 @@ public class Main {
                     id = scanID(scanner, taskManager);
                     if (taskManager.getTasks().containsKey(id)) {
                         System.out.println(taskManager.getTask(id));
-                        taskManager.addToHistory(taskManager.getTask(id));
                     } else if (taskManager.getEpics().containsKey(id)) {
                         System.out.println(taskManager.getEpic(id));
-                        taskManager.addToHistory(taskManager.getEpic(id));
                     } else if (taskManager.getSubtasks().containsKey(id)) {
                         System.out.println(taskManager.getSubtask(id));
-                        taskManager.addToHistory(taskManager.getSubtask(id));
                     }
 
                     break;

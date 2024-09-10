@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="334a662c-08f3-40df-9f93-e2ae649932c4" name="Changes" comment="Sprint 8 HomeWork.ver2&#10;- Изменил модификаторы доступа на protected в методах:&#10;checkEpicTime&#10;checkEpicState&#10;causesTimeConflict&#10;- getPrioritizedTasks теперь возвращает копию&#10;- Изменил модификатор доступа на protected у поля DateTimeFormatter&#10;- Добавил удаление файла в тестах через @AfterEach">
+      <change beforePath="$PROJECT_DIR$/backedListOfTasks.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java-kanban.iml" beforeDir="false" afterPath="$PROJECT_DIR$/java-kanban.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/managers/FileBackedTaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managers/FileBackedTaskManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/managers/InMemoryTaskManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managers/InMemoryTaskManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/managers/ManagerSaveException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/exceptions/ManagerSaveException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/taskclasses/Subtask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/taskclasses/Subtask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/taskclasses/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/taskclasses/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/FileBackedTaskManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/FileBackedTaskManagerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/TaskManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/TaskManagerTest.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="JUnit5 Test Class" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2gJaFP6tTzGxQpaVSNEd3zDwVLD" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.HttpTaskServer.executor": "Run",
+    "Application.Main.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "true",
+    "JUnit.FileBackedTaskManagerTest.addNewEpicAndGetEpicAndGetEpics.executor": "Run",
+    "JUnit.FileBackedTaskManagerTest.addNewSubtaskAndGetSubtaskAndGetSubtasks.executor": "Run",
+    "JUnit.FileBackedTaskManagerTest.addNewTaskAndCheckTimeConflictAndGetTaskAndGetTasks.executor": "Run",
+    "JUnit.FileBackedTaskManagerTest.checkEpicState.executor": "Run",
+    "JUnit.FileBackedTaskManagerTest.checkTimeConflicts.executor": "Run",
+    "JUnit.FileBackedTaskManagerTest.correctReadFromFile.executor": "Run",
+    "JUnit.FileBackedTaskManagerTest.correctSaveToFile.executor": "Run",
+    "JUnit.FileBackedTaskManagerTest.executor": "Run",
+    "JUnit.FileBackedTaskManagerTest.getPrioritizedTasks.executor": "Run",
+    "JUnit.FileBackedTaskManagerTest.getSubtasksForEpic.executor": "Run",
+    "JUnit.FileBackedTaskManagerTest.removeAllTasks.executor": "Run",
+    "JUnit.FileBackedTaskManagerTest.removeEpicWithNoSubtasks.executor": "Run",
+    "JUnit.FileBackedTaskManagerTest.removeEpicWithSubtask.executor": "Run",
+    "JUnit.FileBackedTaskManagerTest.removeSubtask.executor": "Run",
+    "JUnit.FileBackedTaskManagerTest.removeTask.executor": "Run",
+    "JUnit.FileBackedTaskManagerTest.test1.executor": "Run",
+    "JUnit.FileBackedTaskManagerTest.testManagerSaveException.executor": "Run",
+    "JUnit.FileBackedTaskManagerTest.updateEpicWithNoSubtasks.executor": "Run",
+    "JUnit.FileBackedTaskManagerTest.updateEpicWithSubtasks.executor": "Run",
+    "JUnit.FileBackedTaskManagerTest.updateOneSubtaskForOneEpicAndCheckEpicStateAndTime.executor": "Run",
+    "JUnit.FileBackedTaskManagerTest.updateOneSubtaskForTwoEpicsAndCheckEpicState.executor": "Run",
+    "JUnit.FileBackedTaskManagerTest.updateTask.executor": "Run",
+    "JUnit.FileBackedTaskManagerTest.updateTwoSubtasksForOneEpicAndCheckEpicStateAndTime.executor": "Run",
+    "JUnit.FileBackedTaskManagerTest.updateTwoSubtasksForTwoEpicsAndCheckEpicState.executor": "Run",
+    "JUnit.HttpTaskServerEpicsHandlerTest.executor": "Run",
+    "JUnit.HttpTaskServerEpicsHandlerTest.testAddEpicSuccess.executor": "Run",
+    "JUnit.HttpTaskServerEpicsHandlerTest.testAddOrUpdateEpicWrongPath.executor": "Run",
+    "JUnit.HttpTaskServerEpicsHandlerTest.testAddTaskSyntaxError.executor": "Run",
+    "JUnit.HttpTaskServerEpicsHandlerTest.testDeleteEpicIdNotNumber.executor": "Run",
+    "JUnit.HttpTaskServerEpicsHandlerTest.testDeleteEpicNotFound.executor": "Run",
+    "JUnit.HttpTaskServerEpicsHandlerTest.testDeleteEpicSuccess.executor": "Run",
+    "JUnit.HttpTaskServerEpicsHandlerTest.testDeleteEpicWrongPath.executor": "Run",
+    "JUnit.HttpTaskServerEpicsHandlerTest.testGetEpicIdMustBeNumberError.executor": "Run",
+    "JUnit.HttpTaskServerEpicsHandlerTest.testGetEpicNotFound.executor": "Run",
+    "JUnit.HttpTaskServerEpicsHandlerTest.testGetEpicSuccess.executor": "Run",
+    "JUnit.HttpTaskServerEpicsHandlerTest.testGetEpics.executor": "Run",
+    "JUnit.HttpTaskServerEpicsHandlerTest.testGetEpicsWrongPath.executor": "Run",
+    "JUnit.HttpTaskServerEpicsHandlerTest.testGetSubtasksForEpic.executor": "Run",
+    "JUnit.HttpTaskServerEpicsHandlerTest.testGetSubtasksForEpicIdMustBeNumber.executor": "Run",
+    "JUnit.HttpTaskServerEpicsHandlerTest.testGetSubtasksForEpicNotFound.executor": "Run",
+    "JUnit.HttpTaskServerEpicsHandlerTest.testUpdateEpicIdNotNumber.executor": "Run",
+    "JUnit.HttpTaskServerEpicsHandlerTest.testUpdateEpicNotFound.executor": "Run",
+    "JUnit.HttpTaskServerEpicsHandlerTest.testUpdateEpicSuccess.executor": "Run",
+    "JUnit.HttpTaskServerEpicsHandlerTest.testUpdateEpicSyntaxError.executor": "Run",
+    "JUnit.HttpTaskServerEpicsHandlerTest.testUpdateEpicWrongId.executor": "Run",
+    "JUnit.HttpTaskServerEpicsHandlerTest.testWrongMethod.executor": "Run",
+    "JUnit.HttpTaskServerHistoryHandlerTest.executor": "Run",
+    "JUnit.HttpTaskServerHistoryHandlerTest.testGetHistorySuccess.executor": "Run",
+    "JUnit.HttpTaskServerHistoryHandlerTest.testGetHistoryWrongPath.executor": "Run",
+    "JUnit.HttpTaskServerHistoryHandlerTest.testWrongMethod.executor": "Run",
+    "JUnit.HttpTaskServerPrioritizedHandlerTest.executor": "Run",
+    "JUnit.HttpTaskServerPrioritizedHandlerTest.testGetPrioritizedSuccess.executor": "Run",
+    "JUnit.HttpTaskServerPrioritizedHandlerTest.testGetPrioritizedWrongPath.executor": "Run",
+    "JUnit.HttpTaskServerPrioritizedHandlerTest.testWrongMethod.executor": "Run",
+    "JUnit.HttpTaskServerSubtasksHandlerTest.executor": "Run",
+    "JUnit.HttpTaskServerSubtasksHandlerTest.testAddOrUpdateSubtaskWrongPath.executor": "Run",
+    "JUnit.HttpTaskServerSubtasksHandlerTest.testAddSubtaskSuccess.executor": "Run",
+    "JUnit.HttpTaskServerSubtasksHandlerTest.testAddSubtaskSyntaxError.executor": "Run",
+    "JUnit.HttpTaskServerSubtasksHandlerTest.testAddTaskNoParentEpic.executor": "Run",
+    "JUnit.HttpTaskServerSubtasksHandlerTest.testAddTaskTimeInteractions.executor": "Run",
+    "JUnit.HttpTaskServerSubtasksHandlerTest.testDeleteSubtaskIdNotNumber.executor": "Run",
+    "JUnit.HttpTaskServerSubtasksHandlerTest.testDeleteSubtaskNotFound.executor": "Run",
+    "JUnit.HttpTaskServerSubtasksHandlerTest.testDeleteSubtaskSuccess.executor": "Run",
+    "JUnit.HttpTaskServerSubtasksHandlerTest.testDeleteSubtaskWrongPath.executor": "Run",
+    "JUnit.HttpTaskServerSubtasksHandlerTest.testDeleteTaskWrongPath.executor": "Run",
+    "JUnit.HttpTaskServerSubtasksHandlerTest.testGetSubtaskIdMustBeNumberError.executor": "Run",
+    "JUnit.HttpTaskServerSubtasksHandlerTest.testGetSubtaskNotFound.executor": "Run",
+    "JUnit.HttpTaskServerSubtasksHandlerTest.testGetSubtaskSuccess.executor": "Run",
+    "JUnit.HttpTaskServerSubtasksHandlerTest.testGetSubtaskWrongPath.executor": "Run",
+    "JUnit.HttpTaskServerSubtasksHandlerTest.testGetSubtasks.executor": "Run",
+    "JUnit.HttpTaskServerSubtasksHandlerTest.testGetSubtasksSuccess.executor": "Run",
+    "JUnit.HttpTaskServerSubtasksHandlerTest.testGetTasks.executor": "Run",
+    "JUnit.HttpTaskServerSubtasksHandlerTest.testUpdateSubtaskNoParentEpic.executor": "Run",
+    "JUnit.HttpTaskServerSubtasksHandlerTest.testUpdateSubtaskNotFound.executor": "Run",
+    "JUnit.HttpTaskServerSubtasksHandlerTest.testUpdateSubtaskSuccess.executor": "Run",
+    "JUnit.HttpTaskServerSubtasksHandlerTest.testUpdateSubtaskSyntaxError.executor": "Run",
+    "JUnit.HttpTaskServerSubtasksHandlerTest.testUpdateSubtaskTimeInteraction.executor": "Run",
+    "JUnit.HttpTaskServerSubtasksHandlerTest.testUpdateSubtaskWrongId.executor": "Run",
+    "JUnit.HttpTaskServerSubtasksHandlerTest.testUpdateTaskIdNotNumber.executor": "Run",
+    "JUnit.HttpTaskServerSubtasksHandlerTest.testWrongMethod.executor": "Run",
+    "JUnit.HttpTaskServerTasksHandlerTest.executor": "Run",
+    "JUnit.HttpTaskServerTasksHandlerTest.testDeleteTaskIdNotNumber.executor": "Run",
+    "JUnit.HttpTaskServerTasksHandlerTest.testUpdateTaskNotFound.executor": "Run",
+    "JUnit.HttpTaskServerTest.testAddTask.executor": "Run",
+    "JUnit.HttpTaskServerTest.testAddTaskSuccess.executor": "Debug",
+    "JUnit.HttpTaskServerTest.testAddTaskSyntaxError.executor": "Run",
+    "JUnit.HttpTaskServerTest.testAddTaskTimeInteractions.executor": "Run",
+    "JUnit.HttpTaskServerTest.testAddTaskWrongPath.executor": "Run",
+    "JUnit.HttpTaskServerTest.testDeleteTaskNotFound.executor": "Run",
+    "JUnit.HttpTaskServerTest.testDeleteTaskSuccess.executor": "Run",
+    "JUnit.HttpTaskServerTest.testDeleteTaskWrongPath.executor": "Run",
+    "JUnit.HttpTaskServerTest.testGetTaskIdMustBeNumberError.executor": "Run",
+    "JUnit.HttpTaskServerTest.testGetTaskNotFound.executor": "Run",
+    "JUnit.HttpTaskServerTest.testGetTaskSuccess.executor": "Run",
+    "JUnit.HttpTaskServerTest.testGetTaskWrongPath.executor": "Run",
+    "JUnit.HttpTaskServerTest.testGetTasks.executor": "Run",
+    "JUnit.HttpTaskServerTest.testUpdateTaskIdNotNumber.executor": "Run",
+    "JUnit.HttpTaskServerTest.testUpdateTaskNotFound.executor": "Run",
+    "JUnit.HttpTaskServerTest.testUpdateTaskSuccess.executor": "Run",
+    "JUnit.HttpTaskServerTest.testUpdateTaskSyntaxError.executor": "Run",
+    "JUnit.HttpTaskServerTest.testUpdateTaskTimeInteraction.executor": "Run",
+    "JUnit.HttpTaskServerTest.testUpdateTaskWrongId.executor": "Run",
+    "JUnit.HttpTaskServerTest.testWrongMethod.executor": "Run",
+    "JUnit.InMemoryHistoryManagerTest.addToHistory.executor": "Run",
+    "JUnit.InMemoryHistoryManagerTest.addToHistoryMoreThan10.executor": "Run",
+    "JUnit.InMemoryHistoryManagerTest.deleteFromHistory.executor": "Run",
+    "JUnit.InMemoryHistoryManagerTest.executor": "Run",
+    "JUnit.InMemoryHistoryManagerTest.getCorrectLinkedHistory.executor": "Run",
+    "JUnit.InMemoryHistoryManagerTest.getEmptyHistory.executor": "Run",
+    "JUnit.InMemoryHistoryManagerTest.getHistory.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.addNewEpic.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.addNewEpicAndGetEpicAndGetEpics.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.addNewSubtask.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.addNewSubtaskAndGetSubtaskAndGetSubtasks.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.addNewTask.executor": "Coverage",
+    "JUnit.InMemoryTaskManagerTest.addNewTaskAndCheckTimeConflictAndGetTaskAndGetTasks.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.checkEpicState.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.checkTimeConflicts.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.getPrioritizedTasks.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.getSubtasksForEpic.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.removeAllTasks.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.removeEpicWithNoSubtasks.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.removeEpicWithSubtask.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.removeSubtask.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.removeTask.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.test1.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.updateEpic.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.updateEpicWithNoSubtasks.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.updateEpicWithSubtasks.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.updateOneSubtaskForOneEpic.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.updateOneSubtaskForOneEpicAndCheckEpicStateAndTime.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.updateOneSubtaskForTwoEpics.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.updateOneSubtaskForTwoEpicsAndCheckEpicState.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.updateSubtaskForOneEpic.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.updateTask.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.updateTwoSubtasksForOneEpic.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.updateTwoSubtasksForOneEpicAndCheckEpicStateAndTime.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.updateTwoSubtasksForTwoEpics.executor": "Run",
+    "JUnit.InMemoryTaskManagerTest.updateTwoSubtasksForTwoEpicsAndCheckEpicState.executor": "Run",
+    "JUnit.ManagersTest.getDefault.executor": "Run",
+    "JUnit.ManagersTest.getDefaultHistory.executor": "Run",
+    "JUnit.TaskManagerTest.executor": "Run",
+    "JUnit.TaskManagerTest.removeAllTasks.executor": "Run",
+    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "create.test.in.the.same.root": "true",
+    "git-widget-placeholder": "sprint__9-solution-http-api",
+    "jdk.selected.JAVA_MODULE": "corretto-21",
+    "kotlin-language-version-configured": "true",
+    "last_directory_selection": "/Users/dmitriy.brosalin/Desktop/JAVA/java-kanban/src/managers",
+    "last_opened_file_path": "/Users/dmitriy.brosalin/Desktop/JAVA/java-kanban",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="exceptions" />
+      <recent name="managers" />
+      <recent name="handlers" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.FileBackedTaskManagerTest">
+    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="openjdk-21" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="java-kanban" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FileBackedTaskManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="java-kanban" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="FileBackedTaskManagerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HttpTaskServerTasksHandlerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="java-kanban" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="HttpTaskServerTasksHandlerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="InMemoryHistoryManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="java-kanban" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="InMemoryHistoryManagerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="InMemoryTaskManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="java-kanban" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="InMemoryTaskManagerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="InMemoryTaskManagerTest.addNewTaskAndCheckTimeConflictAndGetTaskAndGetTasks" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="java-kanban" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="InMemoryTaskManagerTest" />
+      <option name="METHOD_NAME" value="addNewTaskAndCheckTimeConflictAndGetTaskAndGetTasks" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.FileBackedTaskManagerTest" />
+        <item itemvalue="JUnit.InMemoryTaskManagerTest" />
+        <item itemvalue="JUnit.InMemoryTaskManagerTest.addNewTaskAndCheckTimeConflictAndGetTaskAndGetTasks" />
+        <item itemvalue="JUnit.InMemoryHistoryManagerTest" />
+        <item itemvalue="JUnit.HttpTaskServerTasksHandlerTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="334a662c-08f3-40df-9f93-e2ae649932c4" name="Changes" comment="" />
+      <created>1715418029432</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1715418029432</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Sprint 4 HomeWork.ver1">
+      <option name="closed" value="true" />
+      <created>1715600644532</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1715600644532</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Sprint 4 HomeWork.ver2&#10;&gt; исправил систему хранения данных на 3 HashMap&#10;&gt; создал отдельные методы для вывода разных типов задач&#10;&gt; методы по выводу задач теперь выводят саму задачу, а не текст&#10;&gt; метод по выводу подзадач для эпика теперь выводит массив подзадач, а не текст&#10;&gt; метод по удалению задач теперь не возвращает ничего&#10;&gt; упростил логику добавления задач">
+      <option name="closed" value="true" />
+      <created>1715780114110</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1715780114110</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Sprint 4 HomeWork.ver3&#10;- проверка статуса эпика теперь не возвращает ничего&#10;- разбил метод удаления задачи на три - для каждого типа по методу&#10;- при удалении подзадачи добавил проверку статуса родительского эпика">
+      <option name="closed" value="true" />
+      <created>1715803127830</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1715803127830</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Sprint 5 HomeWork.ver1&#10;Добавлены интерфейсы (TaskManager, HistoryManager).&#10;&#10;Добавлен Менеджер (утилитарный класс) для работы с Менеджерами.&#10;&#10;Добавлена функция получения истории просмотренных задач.&#10;&#10;Добавлены тесты.">
+      <option name="closed" value="true" />
+      <created>1717273415504</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1717273415504</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Sprint 5 HomeWork.ver2&#10;Заменил в интерфейсах и классе Эпика ArrayList на List, а HashMap на Map.&#10;&#10;Добавил модификатор доступа private для мап, хранящих задачи.&#10;&#10;Изменил тип возврата в методах класса Managers - теперь они возвращают интерфейсы.">
+      <option name="closed" value="true" />
+      <created>1717362224964</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1717362224964</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Sprint 5 HomeWork.ver3&#10;Заменил в реализациях интерфейсов ArrayList на List, а HashMap на Map.&#10;&#10;Теперь экземпляр HistoryManager создается в конструкторе TaskManager.">
+      <option name="closed" value="true" />
+      <created>1717447851906</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1717447851906</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Sprint 7 HomeWork.ver1&#10;Добавил новый класс FileBackedTaskManager для работы с файлом, который хранит в себе информацию по задачам.">
+      <option name="closed" value="true" />
+      <created>1721822005536</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1721822005536</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Sprint 7 HomeWork.ver1&#10;Добавил новый класс FileBackedTaskManager для работы с файлом, который хранит в себе информацию по задачам.">
+      <option name="closed" value="true" />
+      <created>1721822329858</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1721822329858</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Sprint 7 HomeWork.ver2&#10;Добавил кастомное исключение при ошибках.">
+      <option name="closed" value="true" />
+      <created>1722016549934</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1722016549934</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Sprint 7 HomeWork.ver2&#10;Добавил кастомное исключение при ошибках.&#10;Переделал работу метода loadFromFile - теперь он статический, а также возвращает экземпляр FileBackedTaskManager.">
+      <option name="closed" value="true" />
+      <created>1722016825613</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1722016825613</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Sprint 8 HomeWork.ver1&#10;Добавил дату и время старта задачи и продолжительность.&#10;Добавил функцию вывода задач в порядке приоритета.&#10;Добавил проверку пересечений по времени.&#10;Добавил новые тесты.">
+      <option name="closed" value="true" />
+      <created>1724099933048</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1724099933048</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Sprint 8 HomeWork.ver1&#10;Добавил дату и время старта задачи и продолжительность.&#10;Добавил функцию вывода задач в порядке приоритета.&#10;Добавил проверку пересечений по времени.&#10;Добавил новые тесты.">
+      <option name="closed" value="true" />
+      <created>1724100055135</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1724100055136</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Sprint 8 HomeWork.ver1&#10;Добавил дату и время старта задачи и продолжительность.&#10;Добавил функцию вывода задач в порядке приоритета.&#10;Добавил проверку пересечений по времени.&#10;Добавил новые тесты.">
+      <option name="closed" value="true" />
+      <created>1724100216141</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1724100216141</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Sprint 8 HomeWork.ver2&#10;- Изменил модификаторы доступа на protected в методах:&#10;checkEpicTime&#10;checkEpicState&#10;causesTimeConflict&#10;- getPrioritizedTasks теперь возвращает копию&#10;- Изменил модификатор доступа на protected у поля DateTimeFormatter&#10;- Добавил удаление файла в тестах через @AfterEach">
+      <option name="closed" value="true" />
+      <created>1724139476884</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1724139476885</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Sprint 8 HomeWork.ver2&#10;- Изменил модификаторы доступа на protected в методах:&#10;checkEpicTime&#10;checkEpicState&#10;causesTimeConflict&#10;- getPrioritizedTasks теперь возвращает копию&#10;- Изменил модификатор доступа на protected у поля DateTimeFormatter&#10;- Добавил удаление файла в тестах через @AfterEach">
+      <option name="closed" value="true" />
+      <created>1724139580665</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1724139580665</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="main" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Sprint 4 HomeWork.ver1" />
+    <MESSAGE value="Sprint 4 HomeWork.ver2&#10;&gt; исправил систему хранения данных на 3 HashMap&#10;&gt; создал отдельные методы для вывода разных типов задач&#10;&gt; методы по выводу задач теперь выводят саму задачу, а не текст&#10;&gt; метод по выводу подзадач для эпика теперь выводит массив подзадач, а не текст&#10;&gt; метод по удалению задач теперь не возвращает ничего&#10;&gt; упростил логику добавления задач" />
+    <MESSAGE value="Sprint 4 HomeWork.ver3&#10;- проверка статуса эпика теперь не возвращает ничего&#10;- разбил метод удаления задачи на три - для каждого типа по методу&#10;- при удалении подзадачи добавил проверку статуса родительского эпика" />
+    <MESSAGE value="Sprint 5 HomeWork.ver1&#10;Добавлены интерфейсы (TaskManager, HistoryManager).&#10;&#10;Добавлен Менеджер (утилитарный класс) для работы с Менеджерами.&#10;&#10;Добавлена функция получения истории просмотренных задач.&#10;&#10;Добавлены тесты." />
+    <MESSAGE value="Sprint 5 HomeWork.ver2&#10;Заменил в интерфейсах и классе Эпика ArrayList на List, а HashMap на Map.&#10;&#10;Добавил модификатор доступа private для мап, хранящих задачи.&#10;&#10;Изменил тип возврата в методах класса Managers - теперь они возвращают интерфейсы." />
+    <MESSAGE value="Sprint 5 HomeWork.ver3&#10;Заменил в реализациях интерфейсов ArrayList на List, а HashMap на Map.&#10;&#10;Теперь экземпляр HistoryManager создается в конструкторе TaskManager." />
+    <MESSAGE value="Sprint 7 HomeWork.ver1&#10;Добавил новый класс FileBackedTaskManager для работы с файлом, который хранит в себе информацию по задачам." />
+    <MESSAGE value="Sprint 7 HomeWork.ver2&#10;Добавил кастомное исключение при ошибках." />
+    <MESSAGE value="Sprint 7 HomeWork.ver2&#10;Добавил кастомное исключение при ошибках.&#10;Переделал работу метода loadFromFile - теперь он статический, а также возвращает экземпляр FileBackedTaskManager." />
+    <MESSAGE value="Sprint 8 HomeWork.ver1&#10;Добавил дату и время старта задачи и продолжительность.&#10;Добавил функцию вывода задач в порядке приоритета.&#10;Добавил проверку пересечений по времени.&#10;Добавил новые тесты." />
+    <MESSAGE value="Sprint 8 HomeWork.ver2&#10;- Изменил модификаторы доступа на protected в методах:&#10;checkEpicTime&#10;checkEpicState&#10;causesTimeConflict&#10;- getPrioritizedTasks теперь возвращает копию&#10;- Изменил модификатор доступа на protected у поля DateTimeFormatter&#10;- Добавил удаление файла в тестах через @AfterEach" />
+    <option name="LAST_COMMIT_MESSAGE" value="Sprint 8 HomeWork.ver2&#10;- Изменил модификаторы доступа на protected в методах:&#10;checkEpicTime&#10;checkEpicState&#10;causesTimeConflict&#10;- getPrioritizedTasks теперь возвращает копию&#10;- Изменил модификатор доступа на protected у поля DateTimeFormatter&#10;- Добавил удаление файла в тестах через @AfterEach" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/java_kanban$InMemoryTaskManagerTest.ic" NAME="InMemoryTaskManagerTest Coverage Results" MODIFIED="1717270522520" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/java_kanban$InMemoryTaskManagerTest_addNewTask.ic" NAME="InMemoryTaskManagerTest.addNewTask Coverage Results" MODIFIED="1717261314098" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+</project>
