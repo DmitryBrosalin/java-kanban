@@ -3,6 +3,7 @@ package handlers;
 import com.sun.net.httpserver.HttpExchange;
 import managers.HttpTaskServer;
 import exceptions.TimeConflictException;
+import managers.TaskManager;
 import taskclasses.Task;
 
 import java.io.IOException;
@@ -10,8 +11,8 @@ import java.util.Map;
 import java.util.Optional;
 
 public class TasksHandler extends BaseHttpHandler {
-    public TasksHandler(HttpTaskServer taskServer) {
-        super(taskServer);
+    public TasksHandler(TaskManager taskManager) {
+        super(taskManager);
     }
 
     @Override
@@ -33,7 +34,7 @@ public class TasksHandler extends BaseHttpHandler {
                             sendNotFound(exchange, id);
                         }
                     } else {
-                        String text = ("id задачи должен быть числом.");
+                        String text = "id задачи должен быть числом.";
                         sendText(exchange, 406, text);
                     }
                 } else if (pathParts.length == 2) {
@@ -41,7 +42,7 @@ public class TasksHandler extends BaseHttpHandler {
                     String jsonTasks = gson.toJson(tasks);
                     sendText(exchange, 200, jsonTasks);
                 } else {
-                    String text = ("Неверный путь.");
+                    String text = "Неверный путь.";
                     sendText(exchange, 400, text);
                 }
             case ("POST"):
@@ -60,22 +61,22 @@ public class TasksHandler extends BaseHttpHandler {
                                         exchange.sendResponseHeaders(201, 0);
                                         exchange.close();
                                     } else {
-                                        String text = ("id введенной задачи не совпадает с id задачи, " +
-                                                "которую вы хотите обновить");
+                                        String text = "id введенной задачи не совпадает с id задачи, " +
+                                                "которую вы хотите обновить";
                                         sendText(exchange, 400, text);
                                     }
                                 } catch (TimeConflictException e) {
                                     sendHasInteractions(exchange);
                                 }
                             } catch (Exception e) {
-                                String text = ("Ошибка при вводе задачи. Проверьте данные.");
+                                String text = "Ошибка при вводе задачи. Проверьте данные.";
                                 sendText(exchange, 400, text);
                             }
                         } else {
                             sendNotFound(exchange, id);
                         }
                     } else {
-                        String text = ("id задачи должен быть числом.");
+                        String text = "id задачи должен быть числом.";
                         sendText(exchange, 406, text);
                     }
                 } else if (pathParts.length == 2) {
@@ -90,11 +91,11 @@ public class TasksHandler extends BaseHttpHandler {
                             sendHasInteractions(exchange);
                         }
                     } catch (Exception e) {
-                        String text = ("Ошибка при вводе задачи. Проверьте данные.");
+                        String text = "Ошибка при вводе задачи. Проверьте данные.";
                         sendText(exchange, 400, text);
                     }
                 } else {
-                    String text = ("Неверный путь.");
+                    String text = "Неверный путь.";
                     sendText(exchange, 400, text);
                 }
                 break;
@@ -111,26 +112,18 @@ public class TasksHandler extends BaseHttpHandler {
                             sendNotFound(exchange, id);
                         }
                     } else {
-                        String text = ("id задачи должен быть числом.");
+                        String text = "id задачи должен быть числом.";
                         sendText(exchange, 406, text);
                     }
                 } else {
-                    String text = ("Неверный путь.");
+                    String text = "Неверный путь.";
                     sendText(exchange, 400, text);
                 }
                 break;
             default:
-                String text = ("Обработка метода " + method + " пока не реализована.");
+                String text = "Обработка метода " + method + " пока не реализована.";
                 sendText(exchange, 405, text);
                 break;
-        }
-    }
-
-    protected Optional<Integer> getTaskId(String[] pathParts) {
-        try {
-            return Optional.of(Integer.parseInt(pathParts[2]));
-        } catch (NumberFormatException exception) {
-            return Optional.empty();
         }
     }
 }

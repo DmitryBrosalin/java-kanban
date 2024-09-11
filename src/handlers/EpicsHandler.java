@@ -2,6 +2,7 @@ package handlers;
 
 import com.sun.net.httpserver.HttpExchange;
 import managers.HttpTaskServer;
+import managers.TaskManager;
 import taskclasses.Epic;
 import taskclasses.Subtask;
 
@@ -10,9 +11,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class EpicsHandler extends TasksHandler {
-    public EpicsHandler(HttpTaskServer taskServer) {
-        super(taskServer);
+public class EpicsHandler extends BaseHttpHandler {
+    public EpicsHandler(TaskManager taskManager) {
+        super(taskManager);
     }
 
     @Override
@@ -34,7 +35,7 @@ public class EpicsHandler extends TasksHandler {
                             sendNotFound(exchange, id);
                         }
                     } else {
-                        String text = ("id эпика должен быть числом.");
+                        String text = "id эпика должен быть числом.";
                         sendText(exchange, 406, text);
                     }
                 } else if (pathParts.length == 2) {
@@ -53,11 +54,11 @@ public class EpicsHandler extends TasksHandler {
                             sendNotFound(exchange, id);
                         }
                     } else {
-                        String text = ("id эпика должен быть числом.");
+                        String text = "id эпика должен быть числом.";
                         sendText(exchange, 406, text);
                     }
                 } else {
-                    String text = ("Неверный путь.");
+                    String text = "Неверный путь.";
                     sendText(exchange, 400, text);
                 }
             case ("POST"):
@@ -75,19 +76,19 @@ public class EpicsHandler extends TasksHandler {
                                     exchange.sendResponseHeaders(201, 0);
                                     exchange.close();
                                 } else {
-                                    String text = ("id введенного эпика не совпадает с id эпика, " +
-                                            "который вы хотите обновить");
+                                    String text = "id введенного эпика не совпадает с id эпика, " +
+                                            "который вы хотите обновить";
                                     sendText(exchange, 400, text);
                                 }
                             } catch (Exception e) {
-                                String text = ("Ошибка при вводе эпика. Проверьте данные.");
+                                String text = "Ошибка при вводе эпика. Проверьте данные.";
                                 sendText(exchange, 400, text);
                             }
                         } else {
                             sendNotFound(exchange, id);
                         }
                     } else {
-                        String text = ("id эпика должен быть числом.");
+                        String text = "id эпика должен быть числом.";
                         sendText(exchange, 406, text);
                     }
                 } else if (pathParts.length == 2) {
@@ -98,11 +99,11 @@ public class EpicsHandler extends TasksHandler {
                         exchange.sendResponseHeaders(201, 0);
                         exchange.close();
                     } catch (Exception e) {
-                        String text = ("Ошибка при вводе эпика. Проверьте данные.");
+                        String text = "Ошибка при вводе эпика. Проверьте данные.";
                         sendText(exchange, 400, text);
                     }
                 } else {
-                    String text = ("Неверный путь.");
+                    String text = "Неверный путь.";
                     sendText(exchange, 400, text);
                 }
                 break;
@@ -119,16 +120,16 @@ public class EpicsHandler extends TasksHandler {
                             sendNotFound(exchange, id);
                         }
                     } else {
-                        String text = ("id эпика должен быть числом.");
+                        String text = "id эпика должен быть числом.";
                         sendText(exchange, 406, text);
                     }
                 } else {
-                    String text = ("Неверный путь.");
+                    String text = "Неверный путь.";
                     sendText(exchange, 400, text);
                 }
                 break;
             default:
-                String text = ("Обработка метода " + method + " пока не реализована.");
+                String text = "Обработка метода " + method + " пока не реализована.";
                 sendText(exchange, 405, text);
                 break;
         }

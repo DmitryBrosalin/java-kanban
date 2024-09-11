@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="334a662c-08f3-40df-9f93-e2ae649932c4" name="Changes" comment="Sprint 9 HomeWork.ver1&#10;- Реализован API.&#10;- Добавлены новые тесты для обработчиков." />
+    <list default="true" id="334a662c-08f3-40df-9f93-e2ae649932c4" name="Changes" comment="Sprint 9 HomeWork.ver1&#10;- Реализован API.&#10;- Добавлены новые тесты для обработчиков.">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/BaseHttpHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/BaseHttpHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/EpicsHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/EpicsHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/HistoryHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/HistoryHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/PrioritizedHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/PrioritizedHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/SubtasksHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/SubtasksHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/handlers/TasksHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/handlers/TasksHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/managers/HttpTaskServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/managers/HttpTaskServer.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -186,6 +196,7 @@
     "JUnit.InMemoryTaskManagerTest.updateTwoSubtasksForOneEpicAndCheckEpicStateAndTime.executor": "Run",
     "JUnit.InMemoryTaskManagerTest.updateTwoSubtasksForTwoEpics.executor": "Run",
     "JUnit.InMemoryTaskManagerTest.updateTwoSubtasksForTwoEpicsAndCheckEpicState.executor": "Run",
+    "JUnit.ManagersTest.executor": "Run",
     "JUnit.ManagersTest.getDefault.executor": "Run",
     "JUnit.ManagersTest.getDefaultHistory.executor": "Run",
     "JUnit.TaskManagerTest.executor": "Run",
@@ -226,7 +237,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.FileBackedTaskManagerTest">
+  <component name="RunManager" selected="JUnit.ManagersTest">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="openjdk-21" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -236,10 +247,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FileBackedTaskManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="HttpTaskServerSubtasksHandlerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="java-kanban" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="FileBackedTaskManagerTest" />
+      <option name="MAIN_CLASS_NAME" value="HttpTaskServerSubtasksHandlerTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -272,23 +283,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="InMemoryTaskManagerTest.addNewTaskAndCheckTimeConflictAndGetTaskAndGetTasks" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ManagersTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="java-kanban" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="InMemoryTaskManagerTest" />
-      <option name="METHOD_NAME" value="addNewTaskAndCheckTimeConflictAndGetTaskAndGetTasks" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="ManagersTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.FileBackedTaskManagerTest" />
+        <item itemvalue="JUnit.ManagersTest" />
         <item itemvalue="JUnit.InMemoryTaskManagerTest" />
-        <item itemvalue="JUnit.InMemoryTaskManagerTest.addNewTaskAndCheckTimeConflictAndGetTaskAndGetTasks" />
         <item itemvalue="JUnit.InMemoryHistoryManagerTest" />
         <item itemvalue="JUnit.HttpTaskServerTasksHandlerTest" />
+        <item itemvalue="JUnit.HttpTaskServerSubtasksHandlerTest" />
       </list>
     </recent_temporary>
   </component>
@@ -429,7 +439,23 @@
       <option name="project" value="LOCAL" />
       <updated>1725983996062</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Sprint 9 HomeWork.ver1&#10;- Реализован API.&#10;- Добавлены новые тесты для обработчиков.">
+      <option name="closed" value="true" />
+      <created>1725984095577</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1725984095577</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Sprint 9 HomeWork.ver1&#10;- Реализован API.&#10;- Добавлены новые тесты для обработчиков.">
+      <option name="closed" value="true" />
+      <created>1725984170090</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1725984170090</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

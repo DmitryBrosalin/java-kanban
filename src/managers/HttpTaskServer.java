@@ -1,30 +1,22 @@
 package managers;
 
 import com.google.gson.*;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
 import com.sun.net.httpserver.HttpServer;
 import handlers.*;
 import taskclasses.Epic;
-import taskclasses.State;
+import adapters.*;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.net.InetSocketAddress;
 import java.nio.file.Paths;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class HttpTaskServer {
     private static final int PORT = 8080;
-    public HttpServer httpServer;
-    public static Gson gson;
-    public TaskManager taskManager;
-
-    public HttpServer getHttpServer() {
-        return httpServer;
-    }
+    private final HttpServer httpServer;
+    private static Gson gson;
+    private final TaskManager taskManager;
 
     public static Gson getGson() {
         return gson;
@@ -51,71 +43,16 @@ public class HttpTaskServer {
                 .registerTypeAdapter(Epic.class, new EpicDeserializer());
         gson = gsonBuilder.create();
 
-        httpServer.createContext("/tasks", new TasksHandler(this));
-        httpServer.createContext("/epics", new EpicsHandler(this));
-        httpServer.createContext("/subtasks", new SubtasksHandler(this));
-        httpServer.createContext("/history", new HistoryHandler(this));
-        httpServer.createContext("/prioritized", new PrioritizedHandler(this));
+        httpServer.createContext("/tasks", new TasksHandler(taskManager));
+        httpServer.createContext("/epics", new EpicsHandler(taskManager));
+        httpServer.createContext("/subtasks", new SubtasksHandler(taskManager));
+        httpServer.createContext("/history", new HistoryHandler(taskManager));
+        httpServer.createContext("/prioritized", new PrioritizedHandler(taskManager));
     }
 
     public static void main(String[] args) throws IOException {
         TaskManager taskManager = FileBackedTaskManager.loadFromFile(Paths.get("backedListOfTasks.txt").toFile());
         HttpTaskServer taskServer = new HttpTaskServer(taskManager);
         taskServer.startServer();
-    }
-
-    static class LocalDateTimeAdapter extends TypeAdapter<LocalDateTime> {
-        private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm dd.MM.yy");
-
-        @Override
-        public void write(final JsonWriter jsonWriter, final LocalDateTime localDateTime) throws IOException {
-            try {
-                jsonWriter.value(localDateTime.format(dtf));
-            } catch (NullPointerException e) {
-                jsonWriter.value("");
-            }
-        }
-
-        @Override
-        public LocalDateTime read(final JsonReader jsonReader) throws IOException {
-            try {
-                return LocalDateTime.parse(jsonReader.nextString(), dtf);
-            } catch (NullPointerException e) {
-                return null;
-            }
-        }
-    }
-
-    static class DurationAdapter extends TypeAdapter<Duration> {
-
-        @Override
-        public void write(final JsonWriter jsonWriter, final Duration duration) throws IOException {
-            try {
-                jsonWriter.value(duration.toMinutes());
-            } catch (NullPointerException e) {
-                jsonWriter.value("");
-            }
-        }
-
-        @Override
-        public Duration read(final JsonReader jsonReader) throws IOException {
-            try {
-                return Duration.ofMinutes(Long.parseLong(jsonReader.nextString()));
-            } catch (NullPointerException e) {
-                return null;
-            }
-        }
-    }
-
-    static class EpicDeserializer implements JsonDeserializer<Epic> {
-        @Override
-        public Epic deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-            JsonObject jsonObject = json.getAsJsonObject();
-            String name = jsonObject.get("name").getAsString();
-            String description = jsonObject.get("description").getAsString();
-            int id = jsonObject.get("id").getAsInt();
-            State state = State.valueOf(jsonObject.get("state").getAsString());
-            return new Epic(name, description, id, state);
-        }
     }
 }

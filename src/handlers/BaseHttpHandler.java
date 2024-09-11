@@ -9,20 +9,16 @@ import managers.TaskManager;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.Optional;
 
-public class BaseHttpHandler implements HttpHandler {
+public abstract class BaseHttpHandler implements HttpHandler {
     protected static final Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;
     protected TaskManager taskManager;
     protected Gson gson;
 
-    public BaseHttpHandler(HttpTaskServer taskServer) {
-        this.taskManager = taskServer.getTaskManager();
+    public BaseHttpHandler(TaskManager taskManager) {
+        this.taskManager = taskManager;
         this.gson = HttpTaskServer.getGson();
-    }
-
-    @Override
-    public void handle(HttpExchange exchange) throws IOException {
-
     }
 
     protected void sendText(HttpExchange exchange, int code, String text) throws IOException {
@@ -49,5 +45,13 @@ public class BaseHttpHandler implements HttpHandler {
         exchange.sendResponseHeaders(406, response.length);
         exchange.getResponseBody().write(response);
         exchange.close();
+    }
+
+    protected Optional<Integer> getTaskId(String[] pathParts) {
+        try {
+            return Optional.of(Integer.parseInt(pathParts[2]));
+        } catch (NumberFormatException exception) {
+            return Optional.empty();
+        }
     }
 }

@@ -4,15 +4,16 @@ import com.sun.net.httpserver.HttpExchange;
 import exceptions.NoParentEpicException;
 import managers.HttpTaskServer;
 import exceptions.TimeConflictException;
+import managers.TaskManager;
 import taskclasses.Subtask;
 
 import java.io.IOException;
 import java.util.Map;
 import java.util.Optional;
 
-public class SubtasksHandler extends TasksHandler {
-    public SubtasksHandler(HttpTaskServer taskServer) {
-        super(taskServer);
+public class SubtasksHandler extends BaseHttpHandler {
+    public SubtasksHandler(TaskManager taskManager) {
+        super(taskManager);
     }
 
     @Override
@@ -34,7 +35,7 @@ public class SubtasksHandler extends TasksHandler {
                             sendNotFound(exchange, id);
                         }
                     } else {
-                        String text = ("id подзадачи должен быть числом.");
+                        String text = "id подзадачи должен быть числом.";
                         sendText(exchange, 406, text);
                     }
                 } else if (pathParts.length == 2) {
@@ -42,7 +43,7 @@ public class SubtasksHandler extends TasksHandler {
                     String jsonTasks = gson.toJson(subtasks);
                     sendText(exchange, 200, jsonTasks);
                 } else {
-                    String text = ("Неверный путь.");
+                    String text = "Неверный путь.";
                     sendText(exchange, 400, text);
                 }
             case ("POST"):
@@ -61,8 +62,8 @@ public class SubtasksHandler extends TasksHandler {
                                         exchange.sendResponseHeaders(201, 0);
                                         exchange.close();
                                     } else {
-                                        String text = ("id введенной подзадачи не совпадает с id подзадачи, " +
-                                                "которую вы хотите обновить");
+                                        String text = "id введенной подзадачи не совпадает с id подзадачи, " +
+                                                "которую вы хотите обновить";
                                         sendText(exchange, 400, text);
                                     }
                                 } catch (TimeConflictException e) {
@@ -71,14 +72,14 @@ public class SubtasksHandler extends TasksHandler {
                                     sendText(exchange, 406, e.getMessage());
                                 }
                             } catch (Exception e) {
-                                String text = ("Ошибка при вводе подзадачи. Проверьте данные.");
+                                String text = "Ошибка при вводе подзадачи. Проверьте данные.";
                                 sendText(exchange, 400, text);
                             }
                         } else {
                             sendNotFound(exchange, id);
                         }
                     } else {
-                        String text = ("id подзадачи должен быть числом.");
+                        String text = "id подзадачи должен быть числом.";
                         sendText(exchange, 406, text);
                     }
                 } else if (pathParts.length == 2) {
@@ -95,11 +96,11 @@ public class SubtasksHandler extends TasksHandler {
                             sendText(exchange, 406, e.getMessage());
                         }
                     } catch (Exception e) {
-                        String text = ("Ошибка при вводе подзадачи. Проверьте данные.");
+                        String text = "Ошибка при вводе подзадачи. Проверьте данные.";
                         sendText(exchange, 400, text);
                     }
                 } else {
-                    String text = ("Неверный путь.");
+                    String text = "Неверный путь.";
                     sendText(exchange, 400, text);
                 }
                 break;
@@ -116,16 +117,16 @@ public class SubtasksHandler extends TasksHandler {
                             sendNotFound(exchange, id);
                         }
                     } else {
-                        String text = ("id подзадачи должен быть числом.");
+                        String text = "id подзадачи должен быть числом.";
                         sendText(exchange, 406, text);
                     }
                 } else {
-                    String text = ("Неверный путь.");
+                    String text = "Неверный путь.";
                     sendText(exchange, 400, text);
                 }
                 break;
             default:
-                String text = ("Обработка метода " + method + " пока не реализована.");
+                String text = "Обработка метода " + method + " пока не реализована.";
                 sendText(exchange, 405, text);
                 break;
         }
