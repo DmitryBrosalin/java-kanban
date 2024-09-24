@@ -1,5 +1,7 @@
 package managers;
 
+import exceptions.NoParentEpicException;
+import exceptions.TimeConflictException;
 import taskclasses.Epic;
 import taskclasses.State;
 import taskclasses.Subtask;
@@ -57,16 +59,19 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public Task getTask(int id) {
+        addToHistory(tasks.get(id));
         return tasks.get(id);
     }
 
     @Override
     public Epic getEpic(int id) {
+        addToHistory(epics.get(id));
         return epics.get(id);
     }
 
     @Override
     public Subtask getSubtask(int id) {
+        addToHistory(subtasks.get(id));
         return subtasks.get(id);
     }
 
@@ -123,7 +128,7 @@ public class InMemoryTaskManager implements TaskManager {
             task.setId(generateID());
             tasks.put(task.getId(), task);
             prioritizedTasks.add(task);
-        }
+        } else throw new TimeConflictException("Пересечение по времени");
     }
 
     @Override
@@ -134,16 +139,20 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void addNewSubtask(Subtask subtask) {
-        if (prioritizedTasks.stream()
-                .noneMatch(t -> causesTimeConflict(subtask, t))) {
-            subtask.setId(generateID());
-            Epic parentEpic = epics.get(subtask.getParentEpicID());
-            List<Integer> subtasksID = parentEpic.getSubtasksID();
-            subtasksID.add(subtask.getId());
-            subtasks.put(subtask.getId(), subtask);
-            prioritizedTasks.add(subtask);
-            checkEpicState(parentEpic);
-            checkEpicTime(parentEpic);
+        if (!epics.containsKey(subtask.getParentEpicID())) {
+            throw new NoParentEpicException("Неверно указан id родительского эпика.");
+        } else {
+            if (prioritizedTasks.stream()
+                    .noneMatch(t -> causesTimeConflict(subtask, t))) {
+                subtask.setId(generateID());
+                Epic parentEpic = epics.get(subtask.getParentEpicID());
+                List<Integer> subtasksID = parentEpic.getSubtasksID();
+                subtasksID.add(subtask.getId());
+                subtasks.put(subtask.getId(), subtask);
+                prioritizedTasks.add(subtask);
+                checkEpicState(parentEpic);
+                checkEpicTime(parentEpic);
+            } else throw new TimeConflictException("Пересечение по времени");
         }
     }
 
@@ -154,7 +163,10 @@ public class InMemoryTaskManager implements TaskManager {
                 .noneMatch(t -> causesTimeConflict(task, t))) {
             prioritizedTasks.add(task);
             tasks.replace(task.getId(), task);
-        } else prioritizedTasks.add(tasks.get(task.getId()));
+        } else {
+            prioritizedTasks.add(tasks.get(task.getId()));
+            throw new TimeConflictException("Пересечение по времени");
+        }
     }
 
     @Override
@@ -167,21 +179,28 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void updateSubtask(Subtask subtask) {
-        prioritizedTasks.remove(subtasks.get(subtask.getId()));
-        if (prioritizedTasks.stream()
-                .noneMatch(t -> causesTimeConflict(subtask, t))) {
-            Subtask oldSubtask = subtasks.get(subtask.getId());
-            Epic oldParentEpic = epics.get(oldSubtask.getParentEpicID());
-            oldParentEpic.getSubtasksID().remove((Object) subtask.getId());
-            prioritizedTasks.add(subtask);
-            subtasks.replace(subtask.getId(), subtask);
-            Epic newParentEpic = epics.get(subtask.getParentEpicID());
-            newParentEpic.getSubtasksID().add(subtask.getId());
-            checkEpicState(oldParentEpic);
-            checkEpicTime(oldParentEpic);
-            checkEpicState(newParentEpic);
-            checkEpicTime(newParentEpic);
-        } else prioritizedTasks.add(subtasks.get(subtask.getId()));
+        if (!epics.containsKey(subtask.getParentEpicID())) {
+            throw new NoParentEpicException("Неверно указан id родительского эпика.");
+        } else {
+            prioritizedTasks.remove(subtasks.get(subtask.getId()));
+            if (prioritizedTasks.stream()
+                    .noneMatch(t -> causesTimeConflict(subtask, t))) {
+                Subtask oldSubtask = subtasks.get(subtask.getId());
+                Epic oldParentEpic = epics.get(oldSubtask.getParentEpicID());
+                oldParentEpic.getSubtasksID().remove((Object) subtask.getId());
+                prioritizedTasks.add(subtask);
+                subtasks.replace(subtask.getId(), subtask);
+                Epic newParentEpic = epics.get(subtask.getParentEpicID());
+                newParentEpic.getSubtasksID().add(subtask.getId());
+                checkEpicState(oldParentEpic);
+                checkEpicTime(oldParentEpic);
+                checkEpicState(newParentEpic);
+                checkEpicTime(newParentEpic);
+            } else {
+                prioritizedTasks.add(subtasks.get(subtask.getId()));
+                throw new TimeConflictException("Пересечение по времени");
+            }
+        }
     }
 
     @Override

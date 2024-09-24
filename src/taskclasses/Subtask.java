@@ -2,6 +2,7 @@ package taskclasses;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Subtask extends Task {
     private int parentEpicID;
@@ -42,6 +43,7 @@ public class Subtask extends Task {
 
     @Override
     public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm dd.MM.yy");
         return taskType + "," +
                 name + "," +
                 description + "," +
